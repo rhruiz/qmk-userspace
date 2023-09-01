@@ -1,6 +1,7 @@
+#pragma message boom
 #include "print.h"
 #include "quantum.h"
-#include "rhruiz.h"
+#include "users/rhruiz/rhruiz.h"
 
 /* space saving overrides */
 uint16_t keycode_config(uint16_t keycode) {

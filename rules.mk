@@ -1,5 +1,4 @@
-INTROSPECTION_KEYMAP_C = rhruiz.c
-SRC += source.c get_tapping_term.c nav_keys.c macros.c rgblight/rgblight.c \
+SRC += rhruiz.c get_tapping_term.c nav_keys.c macros.c rgblight/rgblight.c \
 	   base_layers.c blink_led.c keymap_callbacks/keymap_callbacks.c \
 	   runtime_state.c
 

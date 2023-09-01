@@ -1,6 +1,8 @@
 #pragma once
 #include "quantum.h"
 
+#pragma message boom
+
 // layers: mo
 
 #if defined(TRI_LAYER_ENABLE)

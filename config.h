@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma message boom
+
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 
@@ -41,3 +43,5 @@
 #define MOUSEKEY_MAX_SPEED 6
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX 64
+
+#include "layouts/keys.h"
