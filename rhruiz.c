@@ -1,6 +1,5 @@
-#pragma message boom
 #include "print.h"
-#include "quantum.h"
+#include "quantum/quantum.h"
 #include "users/rhruiz/rhruiz.h"
 
 /* space saving overrides */

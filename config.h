@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma message boom
-
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 

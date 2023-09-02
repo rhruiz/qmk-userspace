@@ -5,6 +5,8 @@ SRC += rhruiz.c get_tapping_term.c nav_keys.c macros.c rgblight/rgblight.c \
 GRAVE_ESC_ENABLE=no
 SPACE_CADET_ENABLE=no
 
+RGBLIGHT_ENABLE = no
+
 ifeq ($(strip $(RAW_ENABLE)), yes)
     SRC += raw_hid/raw_hid.c
 endif
@@ -30,3 +32,8 @@ endif
 ifeq ($(strip $(LOCK_LAYERS)), yes)
 	OPT_DEFS += -DLOCK_LAYERS
 endif
+
+ifeq ($(strip $(OS_DETECTION_ENABLE)), yes)
+    DEFERRED_EXEC_ENABLE = yes
+endif
+
