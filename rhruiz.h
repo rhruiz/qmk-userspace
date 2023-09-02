@@ -1,6 +1,5 @@
 #pragma once
 #include QMK_KEYBOARD_H
-#include "quantum.h"
 #include "runtime_state.h"
 #include "keymap_callbacks/keymap_callbacks.h"
 #include "layouts/keys.h"

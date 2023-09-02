@@ -23,10 +23,10 @@
           "tap_dance": false,
           "caps_word": true,
           "magic": false,
-          "grave_esc": false,
           "tri_layer": true,
           "combo": false,
-          "os_detection": true,
+          "oled_rotate": true,
+          "os_detection": true
       }
   },
   "keyboard": "crkbd/rev1",
