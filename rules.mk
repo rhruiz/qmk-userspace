@@ -4,8 +4,7 @@ SRC += rhruiz.c get_tapping_term.c nav_keys.c macros.c rgblight/rgblight.c \
 
 GRAVE_ESC_ENABLE=no
 SPACE_CADET_ENABLE=no
-
-RGBLIGHT_ENABLE = no
+RGBLIGHT_ENABLE=no
 
 ifeq ($(strip $(RAW_ENABLE)), yes)
     SRC += raw_hid/raw_hid.c
