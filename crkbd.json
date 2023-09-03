@@ -29,7 +29,7 @@
           },
           "transport": {
               "sync_matrix_state": true,
-              "sync_modifiers": true,
+              "sync_modifiers": true
           }
       },
       "bootmagic": {
@@ -71,13 +71,13 @@
   "layers": [
     [
       "KC_TAB", "_______L_QWER_R2_______", "_______R_QWER_R2_______", "KC_BSPC",
-      "CT_ESC", "_______L_QWER_R3_______", "_______R_QWER_R3_______", "KC_QUOT",
+      "CT_ESC", "HRL(_______L_QWER_R3_______)", "HRR(_______R_QWER_R3_______)", "KC_QUOT",
       "KC_LSFT", "_______L_QWER_R4_______", "_______R_QWER_R4_______", "KC_RSFT",
       "KC_LGUI", "MO_LWR", "CT_SPC", "ST_ENT", "MO_RSE" , "KC_LALT"
     ],
     [
      "KC_TAB", "_______L_CODH_R2_______", "_______R_COLE_R2_______", "KC_BSPC",
-     "CT_ESC", "_______L_CODH_R3_______", "_______R_COLE_R3_______", "KC_QUOT",
+     "CT_ESC", "HRL(_______L_CODH_R3_______)", "HRR(_______R_COLE_R3_______)", "KC_QUOT",
      "KC_LSFT", "_______L_CODH_R4_______", "_______R_COLE_R4_______", "KC_RSFT",
      "KC_LGUI", "MO_LWR", "CT_SPC", "ST_ENT", "MO_RSE", "KC_LALT"
     ],
