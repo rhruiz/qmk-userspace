@@ -35,7 +35,7 @@ jobs:
 
     - name: Build firmware
       env:
-        OLED_ENABLE=${{ matrix.oled }}
+        OLED_ENABLE: ${{ matrix.oled }}
       run: qmk compile "users/${{ github.actor }}/${{ matrix.file }}" -e OLED_ENABLE=${OLED_ENABLE} -e OLED_ROTATE_ENABLE=yes
 
     - name: Archive firmware
