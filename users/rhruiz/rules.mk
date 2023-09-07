@@ -10,13 +10,13 @@ ifeq ($(strip $(RAW_ENABLE)), yes)
 endif
 
 ifeq ($(strip $(SPLIT_KEYBOARD)), yes)
-	SRC += users/rhruiz/split.c
+	SRC += split.c
 endif
 
 ifeq ($(strip $(OLED_ROTATE_ENABLE)), yes)
-	OPT_DEFS += -DOLED_ROTATE_ENABLE -DRHRUIZ_OLED_FONT_H="\"users/rhruiz/oled/font_rotated.c\""
+	OPT_DEFS += -DOLED_ROTATE_ENABLE -DRHRUIZ_OLED_FONT_H="\"oled/font_rotated.c\""
 else
-	OPT_DEFS += -DRHRUIZ_OLED_FONT_H="\"users/rhruiz/oled/glcdfont.c\""
+	OPT_DEFS += -DRHRUIZ_OLED_FONT_H="\"oled/glcdfont.c\""
 endif
 
 ifeq ($(strip $(OLED_ENABLE)), yes)
