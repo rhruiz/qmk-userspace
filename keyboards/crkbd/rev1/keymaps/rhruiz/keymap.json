@@ -3,9 +3,6 @@
   "notes": "",
   "documentation": "\"This file is a QMK Configurator export. You can import this at <https://config.qmk.fm>. It can also be used directly with QMK's source code.\n\nTo setup your QMK environment check out the tutorial: <https://docs.qmk.fm/#/newbs>\n\nYou can convert this file to a keymap.c using this command: `qmk json2c {keymap}`\n\nYou can compile this keymap using this command: `qmk compile {keymap}`\"\n",
   "config": {
-      "development_board": "elite_c",
-      "pin_compatible": "promicro",
-      "bootloader": "qmk-dfu",
       "qmk_lufa_bootloader": {
           "esc_input": "D4",
           "esc_output": "F4",
@@ -44,25 +41,9 @@
       },
       "features": {
           "bootmagic": true,
-          "mousekey": true,
-          "extrakey": true,
-          "console": false,
-          "command": false,
-          "nkro": false,
-          "backlight": false,
-          "midi": false,
-          "audio": false,
-          "unicode": false,
-          "rgblight": false,
-          "swap_hands": false,
-          "sleep_led": false,
           "raw": true,
-          "oled": false,
-          "tap_dance": false,
           "caps_word": true,
-          "magic": false,
           "tri_layer": true,
-          "combo": false,
           "oled_rotate": true,
           "os_detection": true
       }
