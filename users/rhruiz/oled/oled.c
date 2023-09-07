@@ -2,9 +2,9 @@
 #include "rhruiz.h"
 
 #ifdef OLED_ROTATE_ENABLE
-#include "users/rhruiz/oled/rotate.c"
+#include "oled/rotate.c"
 #else
-#include "users/rhruiz/oled/no_rotate.c"
+#include "oled/no_rotate.c"
 #endif
 
 __attribute__((weak)) oled_rotation_t oled_init_keymap(oled_rotation_t rotation) {
