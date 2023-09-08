@@ -1,17 +1,84 @@
 name: Build QMK firmware
 on: [push, workflow_dispatch]
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
+
+# jobs:
+#   build:
+#     uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@qmk-userspace
+#     with:
+#       qmk_repo: qmk/qmk_firmware
+#       qmk_ref: master
+
+#   publish:
+#     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@qmk-userspace
+#     if: always() && !cancelled()
+#     needs: build
+# name: Build QMK firmware
+# on: [push, workflow_dispatch]
 
 jobs:
   build:
-    uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@qmk-userspace
-    with:
-      qmk_repo: qmk/qmk_firmware
-      qmk_ref: master
+    runs-on: ubuntu-latest
+    container: ghcr.io/qmk/qmk_cli
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - keyboard: crkbd
+            oled: "yes"
 
-  publish:
-    uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@qmk-userspace
-    if: always() && !cancelled()
-    needs: build
+          # - keyboard: crkbd
+          #   oled: "no"
+
+          # - keyboard: lily58
+          #   oled: "yes"
+
+    steps:
+
+    - name: Disable git safe directory checks
+      run : git config --global --add safe.directory '*'
+
+    - name: Checkout userspace
+      uses: actions/checkout@v3
+
+    - name: Checkout QMK
+      uses: actions/checkout@v3
+      with:
+        repository: qmk/qmk_firmware
+        ref: refs/heads/qmk-userspace
+        submodules: recursive
+        path: qmk_firmware
+
+    - name: Patch QMK Firmware with userspace support
+      run: |
+        cd qmk_firmware
+        git config --global user.email "nonexistent@email-address.invalid"
+        git config --global user.name "QMK GitHub Actions User"
+        git remote add qmk https://github.com/qmk/qmk_firmware.git
+        git fetch qmk qmk-userspace
+        git merge --no-commit --squash qmk/qmk-userspace
+        cd ..
+
+    - name: Setup QMK
+      run: |
+        qmk setup -H $GITHUB_WORKSPACE/qmk_firmware
+        qmk config user.overlay_dir=$GITHUB_WORKSPACE
+        env
+
+    - name: Build firmware
+      env:
+        QMK_HOME: "${{ github.workspace }}/qmk_firmware"
+        OLED_ENABLE: ${{ matrix.oled }}
+      run: qmk compile -km "${{ github.actor }}" -kb "${{ matrix.keyboard }}" -e OLED_ENABLE=${OLED_ENABLE} -e OLED_ROTATE_ENABLE=yes
+
+    - name: Archive firmware
+      uses: actions/upload-artifact@v3
+      continue-on-error: true
+      with:
+        name: ${{ matrix.file }}_${{ github.actor }}
+        path: |
+          *.hex
+          *.bin
+          *.uf2
