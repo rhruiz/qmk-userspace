@@ -29,11 +29,11 @@ jobs:
           - keyboard: crkbd
             oled: "yes"
 
-          # - keyboard: crkbd
-          #   oled: "no"
+          - keyboard: crkbd
+            oled: "no"
 
-          # - keyboard: lily58
-          #   oled: "yes"
+          - keyboard: lily58
+            oled: "yes"
 
     steps:
 
@@ -77,7 +77,7 @@ jobs:
       uses: actions/upload-artifact@v3
       continue-on-error: true
       with:
-        name: ${{ matrix.file }}_${{ github.actor }}
+        name: ${{ matrix.keyboard }}_${{ matrix.oled }}-oled_${{ github.actor }}
         path: |
           *.hex
           *.bin
