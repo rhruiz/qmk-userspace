@@ -26,13 +26,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - keyboard: crkbd
+          - keyboard: crkbd/rev1
             oled: "yes"
 
-          - keyboard: crkbd
+          - keyboard: crkbd/rev1
             oled: "no"
 
-          - keyboard: lily58
+          - keyboard: lily58/rev1
             oled: "yes"
 
     steps:
@@ -42,14 +42,19 @@ jobs:
 
     - name: Checkout userspace
       uses: actions/checkout@v3
+      with:
+        token: ${{ github.token }}
+        submodules: recursive
 
     - name: Checkout QMK
       uses: actions/checkout@v3
       with:
+        token: ${{ github.token }}
         repository: qmk/qmk_firmware
         ref: refs/heads/qmk-userspace
         submodules: recursive
         path: qmk_firmware
+        fetch-depth: 1000
 
     - name: Patch QMK Firmware with userspace support
       run: |
@@ -63,7 +68,7 @@ jobs:
 
     - name: Setup QMK
       run: |
-        qmk setup -H $GITHUB_WORKSPACE/qmk_firmware
+        qmk config user.qmk_home=$GITHUB_WORKSPACE/qmk_firmware
         qmk config user.overlay_dir=$GITHUB_WORKSPACE
         env
 
