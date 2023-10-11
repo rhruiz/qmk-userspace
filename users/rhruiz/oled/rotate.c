@@ -124,8 +124,7 @@ bool rhruiz_render_oled(void) {
                 oled_write_P(_layer_names[get_highest_layer(default_layer_state)], false);
             }
 
-            oled_write_P(nav_keys_index() == 0 ? PSTR(" mac ") : PSTR(" win "), nav_keys_index() % 2 == 0);
-            oled_write_char('\n', false);
+            oled_write_P(nav_keys_index() == 0 ? PSTR(" mac \n") : PSTR(" win \n"), nav_keys_index() % 2 == 0);
 
             break;
 
@@ -166,7 +165,7 @@ bool rhruiz_render_oled(void) {
     render_mod_pair(0x80, 0, mods & MOD_LGUI, mods & MOD_LSFT);
     render_mod_pair(0xa0, 3, mods & MOD_LGUI, mods & MOD_LSFT);
     render_mod_pair(0x84, 0, mods & MOD_LCTL, mods & MOD_LALT);
-    render_mod_pair(0xa6, 3, mods & MOD_LCTL, mods & MOD_LALT);
+    render_mod_pair(0xa4, 3, mods & MOD_LCTL, mods & MOD_LALT);
 
     return false;
 }
