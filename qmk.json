@@ -2,6 +2,12 @@
     "userspace_version": "1.0",
     "build_targets": [
         ["crkbd/rev1", "rhruiz"],
-        ["lily58/rev1", "rhruiz"]
+        ["lily58/rev1", "rhruiz"],
+        ["keebio/laplace", "rhruiz"],
+        ["keebio/viterbi/rev1", "rhruiz"],
+        ["keebio/viterbi/rev1", "rhruiz_outer"],
+        ["dz60", "rhruiz"],
+        ["acheron/shark/beta", "rhruiz"],
+        ["boardwalk", "rhruiz"]
     ]
 }

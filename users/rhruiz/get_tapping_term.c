@@ -10,7 +10,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             if (record->event.key.row < MATRIX_ROWS - 1 && (IS_MODT(MOD_LCTL, keycode) || IS_MODT(MOD_LSFT, keycode))) {
                 return TAPPING_TERM + 50;
             }
-
     }
 
     return TAPPING_TERM;
