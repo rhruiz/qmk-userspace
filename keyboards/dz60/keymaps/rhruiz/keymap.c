@@ -4,17 +4,17 @@
 #define KC__FN1 MO(_FN1)
 #define KC__FN2 MO(_FN2)
 #define _DELFN1 LT(_FN1, KC_DEL)
+#define _DELFN2 LT(_FN2, KC_DEL)
 
 enum rhruiz_keys { KC_KBVSN = SAFE_RANGE };
 
 #ifdef RGBLIGHT_LAYERS
-const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 2, 255, 255}, {7, 1, 2, 255, 255});
+const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 127, 255, 255}, {7, 1, 127, 255, 255});
+const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 21, 255, 255}, {7, 1, 21, 255, 255});
+const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 85, 255, 255}, {7, 1, 85, 255, 255});
+const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 201, 255, 255}, {7, 1, 201, 255, 255});
 
-const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 200, 255, 255}, {7, 1, 200, 255, 255});
-
-const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 80, 255, 255}, {7, 1, 80, 255, 255});
-
-const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, cfg_colors);
+const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, aug_colors, cfg_colors);
 #endif
 
 // clang-format off
@@ -48,24 +48,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GRV ,    ________L_LWR_1________  ,     ________R_LWR_1________  ,  KC_F11 ,  KC_F12 ,  _______,  KC_INS ,
 		KC_CAPS,    ________L_LWR_2________  ,     ________R_LWR_2________  ,  _______,  _______,  KC_DEL ,
 		_______,    ________L_LWR_3________  ,     ________R_LWR_3________  ,  _______,  KC_PENT,
-		_______,  _______,    ________L_LWR_4________  ,     ________R_LWR_3________  ,  _______,  _______,
-		_______,  _______,  _______,  _______,  _______,  _DELFN1,  _______,  _______,  _______,  _______,  _______
+		_______,  _______,  ________L_LWR_4________  ,     ________R_LWR_3________  ,  _______,  _______,
+		_______,  _______,  _______,  _______,  _______,  _DELFN2,  _______,  _______,  _______,  _______,  _______
   ),
 
-  [_FN2] = LAYOUT(
-		KC_GRV ,   KC_SCRL,  KC_PAUS,  NV_MICT,  _______,  RGB_VAD,   RGB_VAI,  KC_MRWD,  KC_MPLY,  KC_MFFD,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,  _______,
-		KC_CAPS,   KC_PIPE,  KC_LCBR,  KC_RCBR,  KC_UNDS,  KC_PLUS,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-		_______,   KC_BSLS,  KC_LBRC,  KC_RBRC,  KC_MINS,  KC_EQL ,   _______,  KC_LEFT,  KC_DOWN,  KC_UP  ,  KC_RGHT,  _______,  KC_PENT,
-		_______,   _______,  KC_EPIP,  KC_LPRN,  KC_RPRN,  _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-		_______,   _______,  _______,  _______,  _______,  _DELFN1,   _______,  _______,  _______,  _______,  _______
+  [_FN2] = LAYOUT_wrapper(
+		KC_GRV ,  ________L_RSE_2________, ________R_RSE_1________, KC_VOLD, KC_VOLU, _______, _______,
+		KC_CAPS,  ________L_RSE_2________, ________R_RSE_2________, _______, _______, _______,
+		_______,  ________L_RSE_3________, ________R_RSE_3________, _______, KC_PENT,
+		_______,  _______, ________L_RSE_4________, ________R_RSE_4________, _______, _______,
+		_______,  _______, _______, _______, _______, _DELFN1,  _______, _______, _______, _______, _______
   ),
 
-  [_CFG] = LAYOUT(
-		_______,  RGB_M_P,  RGB_M_B,  RGB_M_R,  RGB_M_SW,  RGB_M_SN,  RGB_M_K,  RGB_M_X,  RGB_M_G,  RGB_M_T,  _______,  RGB_SPD,  RGB_SPI,  KC_MAKE,  KC_KBVSN,
-		_______,  RGB_TOG,  RGB_MOD,  RGB_HUI,  RGB_HUD,   RGB_SAI,   RGB_SAD,  RGB_VAI,  RGB_VAD,  _______,  _______,  _______,  _______,  QK_BOOT,
-		_______,  KC_VOLU,  KC_VOLD,  KC_MUTE,  KC_EJCT,   _______,   KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   _______,  _______,  _______,
-		_______,  _______,  BL_TOGG,  BL_STEP,  BL_BRTG,   _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-		_______,  _______,  _______,  _______,  _______,   _______,   _______,  _______,  _______,  _______,  _______
+  [_AUG] = LAYOUT_wrapper(
+		_______, ________L_AUG_1________, ________R_AUG_1________, _______, _______, _______, _______,
+		KC_CAPS, ________L_AUG_2________, ________R_AUG_2________, _______, _______, _______,
+		_______, ________L_AUG_3________, ________R_AUG_3________, _______, KC_PENT,
+		_______, _______, ________L_AUG_4________, ________R_AUG_4________, _______, _______,
+		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  ),
+
+  [_CFG] = LAYOUT_wrapper(
+		_______, ________L_CFG_1________,                     ________R_CFG_1________, RGB_SPD, RGB_SPI, KC_MAKE, KC_KBVSN,
+		_______, ________L_CFG_2________,                     ________R_CFG_2________, _______, _______, QK_BOOT,
+		_______, ________L_CFG_3________,                     ________R_CFG_3________, _______, _______,
+		_______, _______, BL_TOGG, BL_STEP, BL_BRTG, _______, QK_BOOT,  ________R_CFG_4________, _______, _______,
+		_______, _______, _______, _______, _______, _______, _______,  _______,  _______,  _______,  _______
   ),
 };
 
@@ -75,7 +83,8 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 #ifdef RGBLIGHT_LAYERS
     rgblight_set_layer_state(0, layer_state_cmp(state, _FN1));
     rgblight_set_layer_state(1, layer_state_cmp(state, _FN2));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _CFG));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _AUG));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _CFG));
 #endif
 
     return state;
