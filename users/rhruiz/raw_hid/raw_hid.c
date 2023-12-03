@@ -27,8 +27,9 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 
         case id_bootloader_jump: {
 #ifdef OLED_ENABLE
+            oled_on();
             oled_clear();
-            oled_write_P(PSTR("BOOT\nLOAD"), false);
+            oled_write_P(PSTR("\n\n\n BOOT\n\n LOAD"), false);
             oled_render_dirty(true);
 #endif
             raw_hid_send(data, length);
