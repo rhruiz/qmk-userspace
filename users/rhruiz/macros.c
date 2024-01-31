@@ -79,6 +79,13 @@ bool process_record_macros(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("```");
             }
             break;
+
+        case KC_K8S: // k8s
+            if (record->event.pressed) {
+                SEND_STRING("kubectl ");
+            }
+            break;
+
         case KC_ARRW:
             if (record->event.pressed) {
                 without_mods(lambda (void, (uint8_t mods) {

@@ -12,6 +12,7 @@ typedef enum custom_keycodes {
     KC_PDIR,
     KC_TQUO,
     KC_CCCP,
+    KC_K8S,
     // config keys
     KC_LAYO,
     KC_LAY0,
