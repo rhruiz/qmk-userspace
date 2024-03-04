@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 void housekeeping_task_keymap(void) {
-    writePin(D5, !layer_state_cmp(layer_state, _NUM));
+    gpio_write_pin(D5, !layer_state_cmp(layer_state, _NUM));
 }
 
 #if defined(CONVERT_TO_PROMICRO_RP2040) && defined(RGBLIGHT_ENABLE)

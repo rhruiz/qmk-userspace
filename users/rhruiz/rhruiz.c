@@ -85,11 +85,11 @@ void keyboard_post_init_user() {
     reset_runtime_state();
 
 #if defined(BOOTLOADER_CATERINA) || defined(PRO_MICRO)
-    setPinOutput(B0);
-    writePinHigh(B0);
+    gpio_set_pin_output(B0);
+    gpio_write_pin_high(B0);
 
-    setPinOutput(D5);
-    writePinHigh(D5);
+    gpio_set_pin_output(D5);
+    gpio_write_pin_high(D5);
 #endif
 
 #ifdef SPLIT_KEYBOARD

@@ -24,14 +24,14 @@ const keypos_t hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
     if (state & (1 << _NUM)) {
-        writePinLow(D5);
+        gpio_write_pin_low(D5);
 #ifndef CONVERT_TO_PROTON_C
-        writePinLow(B0);
+        gpio_write_pin_low(B0);
 #endif
     } else {
-        writePinHigh(D5);
+        gpio_write_pin_high(D5);
 #ifndef CONVERT_TO_PROTON_C
-        writePinHigh(B0);
+        gpio_write_pin_high(B0);
 #endif
     }
 

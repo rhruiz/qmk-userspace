@@ -31,7 +31,7 @@ void blink_led_task() {
     }
 
     if (timer_expired(sync_timer_read(), blink_repeat_timer)) {
-        writePin(BLINK_LED_PIN, blink_times_remaining % 2 == 1);
+        gpio_write_pin(BLINK_LED_PIN, blink_times_remaining % 2 == 1);
 
         if (blink_times_remaining > 0) {
             blink_times_remaining--;

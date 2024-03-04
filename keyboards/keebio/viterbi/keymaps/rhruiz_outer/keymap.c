@@ -113,11 +113,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
     if (state & (1 << _NUM)) {
-        writePinLow(D5);
-        writePinLow(B0);
+        gpio_write_pin_low(D5);
+        gpio_write_pin_low(B0);
     } else {
-        writePinHigh(D5);
-        writePinHigh(B0);
+        gpio_write_pin_high(D5);
+        gpio_write_pin_high(B0);
     }
 
     return state;
