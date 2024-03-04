@@ -54,29 +54,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 #ifdef OS_DETECTION_ENABLE
-uint32_t os_detection(uint32_t trigger_time, void *cb_arg) {
-    os_variant_t host_os = detected_host_os();
-
-    if (host_os) {
+bool process_detected_host_os_user(os_variant_t host_os) {
 #   ifdef SPLIT_KEYBOARD
         set_needs_runtime_state_sync(true);
 
 #   endif
-        switch (host_os) {
-            case OS_MACOS:
-            case OS_IOS:
-                set_nav_keys_index(0);
-                break;
+    switch (host_os) {
+        case OS_MACOS:
+        case OS_IOS:
+            set_nav_keys_index(0);
+            break;
 
-            default:
-                set_nav_keys_index(1);
-                break;
-        }
-
-        return 0;
+        default:
+            set_nav_keys_index(1);
+            break;
     }
 
-    return 500;
+    return true;
 }
 #endif
 
@@ -96,12 +90,6 @@ void keyboard_post_init_user() {
 #   ifdef BLINK_LED_PIN
     transaction_register_rpc(USER_SYNC_BLINK_LED, blink_led_handler);
 #   endif
-#endif
-
-#ifdef OS_DETECTION_ENABLE
-    if (is_keyboard_master()) {
-        defer_exec(100, os_detection, NULL);
-    }
 #endif
 
 #if defined(TRI_LAYER_ENABLE)
