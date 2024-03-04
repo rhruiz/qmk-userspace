@@ -30,9 +30,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_FUNCTION
 
 #ifdef RGB_LIGHT_ENABLE
-#undef RGBLED_NUM
+#undef RGBLIGHT_LED_COUNT
 #define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 27
+#define RGBLIGHT_LED_COUNT 27
 #define RGBLIGHT_LIMIT_VAL 120
 #define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 17
@@ -40,8 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Underglow
 /*
-#undef RGBLED_NUM
-#define RGBLED_NUM 14    // Number of LEDs
+#undef RGBLIGHT_LED_COUNT
+#define RGBLIGHT_LED_COUNT 14    // Number of LEDs
 #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_SLEEP
 */

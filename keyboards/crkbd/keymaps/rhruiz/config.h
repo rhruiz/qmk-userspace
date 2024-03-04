@@ -28,10 +28,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    if defined(RGBLIGHT_ENABLE)
 #        define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #        undef RGB_DI_PIN
-#        undef RGBLED_NUM
+#        undef RGBLIGHT_LED_COUNT
 #        undef RGBLED_SPLIT
 #        define RGB_DI_PIN 25U
-#        define RGBLED_NUM 1
+#        define RGBLIGHT_LED_COUNT 1
 #    endif
 #endif
 

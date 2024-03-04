@@ -13,8 +13,8 @@ void rhruiz_change_leds_to(uint16_t hue, uint8_t sat) {
     rgb_led_t *ledp;
 
 #ifdef RGBLIGHT_LED_MAP
-    rgb_led_t led0[RGBLED_NUM];
-    for (uint8_t i = 0; i < RGBLED_NUM; i++) {
+    rgb_led_t led0[RGBLIGHT_LED_COUNT];
+    for (uint8_t i = 0; i < RGBLIGHT_LED_COUNT; i++) {
         led0[i] = led[pgm_read_byte(&led_map[i])];
     }
     ledp = led0;
@@ -22,14 +22,14 @@ void rhruiz_change_leds_to(uint16_t hue, uint8_t sat) {
     ledp = led;
 #endif
 
-    for (uint8_t i = RGBLED_NUM; i-- > 0;) {
+    for (uint8_t i = RGBLIGHT_LED_COUNT; i-- > 0;) {
         sethsv(hue, sat, eeprom_config.val, (rgb_led_t *)&ledp[i]);
     }
 
 #ifdef RGBW
-    ws2812_setleds_rgbw(ledp, RGBLED_NUM);
+    ws2812_setleds_rgbw(ledp, RGBLIGHT_LED_COUNT);
 #else
-    ws2812_setleds(ledp, RGBLED_NUM);
+    ws2812_setleds(ledp, RGBLIGHT_LED_COUNT);
 #endif
 }
 #endif
