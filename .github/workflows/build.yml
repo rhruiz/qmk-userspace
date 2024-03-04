@@ -1,22 +1,5 @@
-name: Build QMK firmware
+name: Build QMK firmware - corne and lily58
 on: [push, workflow_dispatch]
-
-# permissions:
-#   contents: write
-
-# jobs:
-#   build:
-#     uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@qmk-userspace
-#     with:
-#       qmk_repo: qmk/qmk_firmware
-#       qmk_ref: master
-
-#   publish:
-#     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@qmk-userspace
-#     if: always() && !cancelled()
-#     needs: build
-# name: Build QMK firmware
-# on: [push, workflow_dispatch]
 
 jobs:
   build:
@@ -34,9 +17,7 @@ jobs:
 
           - keyboard: lily58/rev1
             oled: "yes"
-
     steps:
-
     - name: Disable git safe directory checks
       run : git config --global --add safe.directory '*'
 
