@@ -24,6 +24,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define BLINK_LED_PIN B0
 
+#ifdef OLED_ENABLE
+#    define OLED_BRIGHTNESS 8
+#endif
+
 #if defined(CONVERT_TO_PROMICRO_RP2040)
 #    if defined(RGBLIGHT_ENABLE)
 #        define RGBLIGHT_EFFECT_RAINBOW_MOOD

@@ -14,7 +14,6 @@
 #endif
 
 #ifdef OLED_ENABLE
-#    define OLED_BRIGHTNESS 8
 #    ifdef OLED_FONT_H
 #        undef OLED_FONT_H
 #    endif
