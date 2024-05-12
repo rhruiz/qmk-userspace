@@ -2,6 +2,7 @@
 #include "rhruiz.h"
 #include "lib/lib8tion/lib8tion.h"
 
+#ifndef MAGIC_ENABLE
 /* space saving overrides */
 uint16_t keycode_config(uint16_t keycode) {
     return keycode;
@@ -10,6 +11,7 @@ uint16_t keycode_config(uint16_t keycode) {
 uint8_t mod_config(uint8_t mod) {
     return mod;
 }
+#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!(process_record_keymap(keycode, record)
