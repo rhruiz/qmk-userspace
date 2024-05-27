@@ -22,7 +22,13 @@ const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
     [NV_SCSH - NV_START] = {SCMD(KC_3), KC_PSCR},
     [NV_WSCH - NV_START] = {SCMD(KC_4), SGUI(KC_S)},
     [NV_WSWT - NV_START] = {KC_LGUI, KC_LALT},
+    [NV_1MOD - NV_START] = {KC_LGUI, KC_LCTL},
+    [NV_2MOD - NV_START] = {KC_LCTL, KC_LGUI},
 };
+
+#ifdef HOME_ROW_MODS
+const uint16_t os_enabled_homerowmods[2] PROGMEM = { NV_2MOD, NV_1MOD };
+#endif
 
 uint16_t get_nav_code(uint16_t keycode) {
     return pgm_read_word(&(nav_keys[keycode - NV_START][nav_keys_index()]));
@@ -79,6 +85,34 @@ layer_state_t default_layer_state_set_user_nav(layer_state_t state) {
     return state;
 }
 
+bool process_record_os_enabled_homerowmod(uint16_t keycode, keyrecord_t *record) {
+    if ((record->event.key.row != HOME_ROW_NUMBER_LEFT && record->event.key.row != HOME_ROW_NUMBER_RIGHT)
+            || record->tap.count || !IS_QK_MOD_TAP(keycode)) {
+        return true;
+    }
+
+    /* 5-bit packed modifiers
+     *
+     * Mod bits:    43210
+     *   bit 0      ||||+- Control
+     *   bit 1      |||+-- Shift
+     *   bit 2      ||+--- Alt
+     *   bit 3      |+---- Gui
+     *   bit 4      +----- LR flag(Left:0, Right:1)
+     */
+    uint8_t mod = QK_MOD_TAP_GET_MODS(keycode);
+
+    if (mod & 0b00110) {
+        return true;
+    }
+
+    void (*handler)(uint16_t) = record->event.pressed ? register_code16 : unregister_code16;
+    uint16_t mod_to_send = get_nav_code(pgm_read_word(&(os_enabled_homerowmods[(mod >> 3) & 1])));
+
+    handler(mod_to_send | ((KC_LCMD ^ KC_RCMD) * ((mod >> 4) & 1)));
+    return false;
+}
+
 bool process_record_nav(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_CTAB:
@@ -100,7 +134,11 @@ bool process_record_nav(uint16_t keycode, keyrecord_t *record) {
             break;
 
         default:
+#ifdef HOME_ROW_MODS
+            return process_record_os_enabled_homerowmod(keycode, record);
+#else
             return true;
+#endif
     }
 
     return false;

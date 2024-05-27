@@ -40,7 +40,9 @@ typedef enum custom_keycodes {
     NV_SCSH, // screenshot
     NV_WSCH, // window screenshot
     NV_WSWT, // window switcher key
-    NV_END = NV_WSWT,
+    NV_1MOD, // main modifier (cmd on mac, ctrl on linux/windows)
+    NV_2MOD, // ctrl on mac, gui on linux/windows
+    NV_END = NV_2MOD,
     USER_SAFE_RANGE
 } rhruiz_keycodes;
 

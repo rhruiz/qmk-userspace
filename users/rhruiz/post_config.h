@@ -1,0 +1,11 @@
+#ifndef HOME_ROW_NUMBER_RIGHT
+#define HOME_ROW_NUMBER_RIGHT MATRIX_ROWS - 3
+#endif
+
+#ifndef HOME_ROW_NUMBER_LEFT
+#ifdef SPLIT_KEYBOARD
+#define HOME_ROW_NUMBER_LEFT MATRIX_ROWS / 2 - 3
+#else
+#define HOME_ROW_NUMBER_RIGHT
+#endif
+#endif
