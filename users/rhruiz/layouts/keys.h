@@ -110,3 +110,4 @@ typedef enum custom_keycodes {
 #define S_TAB LSFT(KC_TAB)
 #define S_LCTL LSFT(KC_LCTL)
 #define A_SPACE LALT(KC_SPACE)
+#define AS_SPC LALT(LSFT(KC_SPACE))
