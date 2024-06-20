@@ -25,3 +25,5 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 OPT_DEFS += -DPRO_MICRO
 SPLIT_TRANSPORT = mirror
+
+OS_DETECTION_ENABLE ?= yes
