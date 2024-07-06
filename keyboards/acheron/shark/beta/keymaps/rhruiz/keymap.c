@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef ENCODER_ENABLE
 typedef enum {
-    ENC_VOLUME, ENC_RGB_MOD, ENC_RGB_VAL, ENC_RGB_HUE, ENC_RGB_SAT
+    ENC_VOLUME, ENC_UG_MOD, ENC_UG_VAL, ENC_UG_HUE, ENC_UG_SAT
 } RHRUIZ_ENCODER_MODE;
 
 RHRUIZ_ENCODER_MODE _current_encoder_mode;
@@ -163,10 +163,10 @@ void _encoder_volume_down(void) {
 
 void (*rhruiz_encoder_handlers[][2]) (void) = {
     [ENC_VOLUME] = {&_encoder_volume_down, &_encoder_volume_up},
-    [ENC_RGB_MOD] = {&rgblight_step_reverse, &rgblight_step},
-    [ENC_RGB_VAL] = {&rgblight_decrease_val, &rgblight_increase_val},
-    [ENC_RGB_HUE] = {&rgblight_decrease_hue, &rgblight_increase_hue},
-    [ENC_RGB_SAT] = {&rgblight_decrease_sat, &rgblight_increase_sat},
+    [ENC_UG_MOD] = {&rgblight_step_reverse, &rgblight_step},
+    [ENC_UG_VAL] = {&rgblight_decrease_val, &rgblight_increase_val},
+    [ENC_UG_HUE] = {&rgblight_decrease_hue, &rgblight_increase_hue},
+    [ENC_UG_SAT] = {&rgblight_decrease_sat, &rgblight_increase_sat},
 };
 #endif
 
@@ -226,17 +226,17 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                 _current_encoder_mode = ENC_VOLUME;
                 return true;
 
-            case RGB_MOD:
-                _current_encoder_mode = ENC_RGB_MOD;
+            case UG_NEXT:
+                _current_encoder_mode = ENC_UG_MOD;
                 return false;
-            case RGB_VAI:
-                _current_encoder_mode = ENC_RGB_VAL;
+            case UG_VALU:
+                _current_encoder_mode = ENC_UG_VAL;
                 return false;
-            case RGB_HUI:
-                _current_encoder_mode = ENC_RGB_HUE;
+            case UG_HUEU:
+                _current_encoder_mode = ENC_UG_HUE;
                 return false;
-            case RGB_SAI:
-                _current_encoder_mode = ENC_RGB_SAT;
+            case UG_SATU:
+                _current_encoder_mode = ENC_UG_SAT;
                 return false;
 #endif
         }

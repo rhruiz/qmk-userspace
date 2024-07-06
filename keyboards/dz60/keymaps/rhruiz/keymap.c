@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_CFG] = LAYOUT_wrapper(
-		_______, ________L_CFG_1________,                     ________R_CFG_1________, RGB_SPD, RGB_SPI, KC_MAKE, KC_KBVSN,
+		_______, ________L_CFG_1________,                     ________R_CFG_1________, UG_SPDD, UG_SPDU, KC_MAKE, KC_KBVSN,
 		_______, ________L_CFG_2________,                     ________R_CFG_2________, _______, _______, QK_BOOT,
 		_______, ________L_CFG_3________,                     ________R_CFG_3________, _______, _______,
 		_______, _______, BL_TOGG, BL_STEP, BL_BRTG, _______, QK_BOOT,  ________R_CFG_4________, _______, _______,
