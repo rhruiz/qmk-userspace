@@ -5,7 +5,7 @@ uint16_t copy_paste_timer;
 bool is_window_switcher_active;
 
 const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
-    [NV_NWIN - NV_START] = {LCMD(KC_GRV), LALT(KC_TAB)},
+    [NV_NWIN - NV_START] = {LCMD(KC_GRV), LGUI(KC_GRV)},
     [NV_SCTP - NV_START] = {LCMD(KC_UP), LGUI(KC_HOME)},
     [NV_SCBT - NV_START] = {LCMD(KC_DOWN), LGUI(KC_END)},
     [NV_EOL  - NV_START] = {LCMD(KC_RIGHT), KC_END},
