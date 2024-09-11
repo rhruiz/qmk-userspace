@@ -27,7 +27,9 @@ const rgblight_segment_t PROGMEM num_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 7, 4
 
 const rgblight_segment_t PROGMEM game_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 7, 148, 255, 255});
 
-const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, cfg_colors, num_colors, game_colors);
+const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 7, 170, 255, 255});
+
+const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, cfg_colors, num_colors, game_colors, aug_colors);
 #endif
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
@@ -37,6 +39,7 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
     rgblight_set_layer_state(2, layer_state_cmp(state, _CFG));
     rgblight_set_layer_state(3, layer_state_cmp(state, _NUM));
     rgblight_set_layer_state(4, layer_state_cmp(state, _GAME));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _AUG));
 #endif
 
     return state;
