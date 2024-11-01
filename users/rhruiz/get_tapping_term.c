@@ -5,9 +5,12 @@
 
 #ifdef HOME_ROW_MODS
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    uint8_t row = record->event.key.row;
+
     switch (keycode) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX:
-            if (record->event.key.row < MATRIX_ROWS - 1 && (IS_MODT(MOD_LCTL, keycode) || IS_MODT(MOD_LSFT, keycode))) {
+            if ((row == HOME_ROW_NUMBER_RIGHT || row == HOME_ROW_NUMBER_LEFT) &&
+                (IS_MODT(MOD_LCTL, keycode) || IS_MODT(MOD_LSFT, keycode))) {
                 return TAPPING_TERM + 50;
             }
     }
