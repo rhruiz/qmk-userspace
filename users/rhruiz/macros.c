@@ -86,6 +86,14 @@ bool process_record_macros(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+        case KC_GRET:
+            if (record->event.pressed) {
+                without_mods(lambda (void, (uint8_t mods) {
+                    SEND_STRING("Olar! Tudo bom e vc?");
+                }));
+            }
+            break;
+
         case KC_ARRW:
             if (record->event.pressed) {
                 without_mods(lambda (void, (uint8_t mods) {

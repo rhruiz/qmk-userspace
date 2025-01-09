@@ -13,6 +13,7 @@ typedef enum custom_keycodes {
     KC_TQUO,
     KC_CCCP,
     KC_K8S,
+    KC_GRET,
     // config keys
     KC_LAYO,
     KC_LAY0,
