@@ -5,7 +5,7 @@ uint16_t copy_paste_timer;
 bool is_window_switcher_active;
 
 const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
-    [NV_NWIN - NV_START] = {LCMD(KC_GRV), LGUI(KC_GRV)},
+    [NV_NWIN - NV_START] = {KC_GRV, KC_GRV},
     [NV_SCTP - NV_START] = {LCMD(KC_UP), LGUI(KC_HOME)},
     [NV_SCBT - NV_START] = {LCMD(KC_DOWN), LGUI(KC_END)},
     [NV_EOL  - NV_START] = {LCMD(KC_RIGHT), KC_END},
@@ -65,7 +65,7 @@ void perform_nav_key(uint16_t keycode, keyrecord_t *record) {
     handler(nav_keycode);
 }
 
-void window_switcher(keyrecord_t *record) {
+void window_switcher(keyrecord_t *record, uint16_t keycode) {
     void (*handler)(uint16_t) = record->event.pressed ? register_code16 : unregister_code16;
 
     if (record->event.pressed) {
@@ -73,12 +73,12 @@ void window_switcher(keyrecord_t *record) {
         handler(get_nav_code(NV_WSWT));
     }
 
-    handler(KC_TAB);
+    handler(keycode);
 }
 
 layer_state_t default_layer_state_set_user_nav(layer_state_t state) {
     if (state < FIRST_NON_BASE_LAYER && is_window_switcher_active) {
-        unregister_code(get_nav_code(NV_WSWT));
+        unregister_code16(get_nav_code(NV_WSWT));
         is_window_switcher_active = false;
     }
 
@@ -116,7 +116,11 @@ bool process_record_os_enabled_homerowmod(uint16_t keycode, keyrecord_t *record)
 bool process_record_nav(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_CTAB:
-            window_switcher(record);
+            window_switcher(record, KC_TAB);
+            break;
+
+        case NV_NWIN:
+            window_switcher(record, KC_GRV);
             break;
 
         case NV_START ... NV_END:
