@@ -2,10 +2,11 @@
 #include "rhruiz.h"
 
 uint16_t copy_paste_timer;
-bool is_window_switcher_active;
+uint8_t window_switcher_mod = 0;
 
 const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
-    [NV_NWIN - NV_START] = {KC_GRV, KC_GRV},
+    [NV_NWIN - NV_START] = {LCMD(KC_GRV), LALT(KC_GRV)},
+    [KC_CTAB - NV_START] = {LCMD(KC_TAB), LALT(KC_TAB)},
     [NV_SCTP - NV_START] = {LCMD(KC_UP), LGUI(KC_HOME)},
     [NV_SCBT - NV_START] = {LCMD(KC_DOWN), LGUI(KC_END)},
     [NV_EOL  - NV_START] = {LCMD(KC_RIGHT), KC_END},
@@ -21,7 +22,6 @@ const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
     [NV_PSTE - NV_START] = {LCMD(KC_V), LCTL(KC_V)},
     [NV_SCSH - NV_START] = {SCMD(KC_3), KC_PSCR},
     [NV_WSCH - NV_START] = {SCMD(KC_4), SGUI(KC_S)},
-    [NV_WSWT - NV_START] = {KC_LGUI, KC_LALT},
     [NV_1MOD - NV_START] = {KC_LGUI, KC_LCTL},
     [NV_2MOD - NV_START] = {KC_LCTL, KC_LGUI},
 };
@@ -65,21 +65,20 @@ void perform_nav_key(uint16_t keycode, keyrecord_t *record) {
     handler(nav_keycode);
 }
 
-void window_switcher(keyrecord_t *record, uint16_t keycode) {
+void window_switcher(uint16_t keycode, keyrecord_t *record) {
     void (*handler)(uint16_t) = record->event.pressed ? register_code16 : unregister_code16;
 
     if (record->event.pressed) {
-        is_window_switcher_active = true;
-        handler(get_nav_code(NV_WSWT));
+        register_mods(window_switcher_mod = QK_MODS_GET_MODS(keycode));
     }
 
-    handler(keycode);
+    handler(QK_MODS_GET_BASIC_KEYCODE(keycode));
 }
 
 layer_state_t default_layer_state_set_user_nav(layer_state_t state) {
-    if (state < FIRST_NON_BASE_LAYER && is_window_switcher_active) {
-        unregister_code16(get_nav_code(NV_WSWT));
-        is_window_switcher_active = false;
+    if (state < FIRST_NON_BASE_LAYER && window_switcher_mod != 0) {
+        unregister_mods(window_switcher_mod);
+        window_switcher_mod = 0;
     }
 
     return state;
@@ -116,11 +115,8 @@ bool process_record_os_enabled_homerowmod(uint16_t keycode, keyrecord_t *record)
 bool process_record_nav(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_CTAB:
-            window_switcher(record, KC_TAB);
-            break;
-
         case NV_NWIN:
-            window_switcher(record, KC_GRV);
+            window_switcher(get_nav_code(keycode), record);
             break;
 
         case NV_START ... NV_END:

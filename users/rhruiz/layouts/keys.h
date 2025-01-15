@@ -20,12 +20,9 @@ typedef enum custom_keycodes {
     KC_LAY1,
     KC_OLBR, // oled brightness
     KC_NOS,
-    // window switcher
-    KC_CTAB,
     // os independent nav keys
     NV_START,
-    NV_WSWT = NV_START, // window switcher key
-    NV_SCTP, // scroll to bottom
+    NV_SCTP = NV_START, // scroll to bottom
     NV_SCBT, // scroll to top
     NV_EOL,
     NV_BOL,
@@ -43,6 +40,7 @@ typedef enum custom_keycodes {
     NV_1MOD, // main modifier (cmd on mac, ctrl on linux/windows)
     NV_2MOD, // ctrl on mac, gui on linux/windows
     NV_END = NV_2MOD,
+    KC_CTAB, // window switcher
     NV_NWIN, // next window
     USER_SAFE_RANGE
 } rhruiz_keycodes;
