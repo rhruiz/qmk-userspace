@@ -20,8 +20,8 @@ const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
     [NV_MICT - NV_START] = {LCTL(KC_UP), LGUI(KC_TAB)},
     [NV_COPY - NV_START] = {LCMD(KC_C), LCTL(KC_C)},
     [NV_PSTE - NV_START] = {LCMD(KC_V), LCTL(KC_V)},
-    [NV_SCSH - NV_START] = {SCMD(KC_3), KC_PSCR},
-    [NV_WSCH - NV_START] = {SCMD(KC_4), SGUI(KC_S)},
+    [NV_SCSH - NV_START] = {SCMD(KC_3), LSFT(KC_PSCR)},
+    [NV_WSCH - NV_START] = {SCMD(KC_4), KC_PSCR},
     [NV_1MOD - NV_START] = {KC_LGUI, KC_LCTL},
     [NV_2MOD - NV_START] = {KC_LCTL, KC_LGUI},
 };
