@@ -181,9 +181,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+#if defined(PRO_MICRO)
 void housekeeping_task_keymap(void) {
     gpio_write_pin(D5, !layer_state_cmp(layer_state, _NUM));
 }
+#endif
 
 #if defined(CONVERT_TO_PROMICRO_RP2040) && defined(RGBLIGHT_ENABLE)
 void keyboard_post_init_keymap() {

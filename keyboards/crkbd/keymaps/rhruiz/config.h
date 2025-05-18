@@ -22,7 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define BASE_LAYERS _QWER, _CODH
 
-#define BLINK_LED_PIN B0
+#if defined(QMK_MCU_ATMEGA32U4)
+#    define PRO_MICRO
+#    define BLINK_LED_PIN B0
+#    define EE_HANDS
+#endif
 
 #ifdef OLED_ENABLE
 #    define OLED_BRIGHTNESS 8
@@ -38,8 +42,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #        define RGBLIGHT_LED_COUNT 1
 #    endif
 #endif
-
-#define EE_HANDS
 
 // bootmagic
 
