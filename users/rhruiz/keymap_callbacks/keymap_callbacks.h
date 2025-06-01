@@ -14,3 +14,6 @@ void suspend_wakeup_init_keymap(void);
 #ifdef OLED_ENABLE
 bool oled_task_keymap(void);
 #endif
+#ifdef RGB_MATRIX_ENABLE
+bool rgb_matrix_indicators_keymap(void);
+#endif

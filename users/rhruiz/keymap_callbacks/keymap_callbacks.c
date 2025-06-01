@@ -1,4 +1,5 @@
 #include "quantum.h"
+#include "keymap_callbacks.h"
 
 __attribute__((weak)) layer_state_t layer_state_set_keymap(layer_state_t state) { return state; }
 
@@ -22,4 +23,16 @@ __attribute__((weak)) void suspend_wakeup_init_keymap(void) {}
 
 #ifdef OLED_ENABLE
 __attribute__((weak)) bool oled_task_keymap(void) { return true; }
+#endif
+
+#ifdef RGB_MATRIX_ENABLE
+bool rgb_matrix_indicators_user(void) {
+    if (!rgb_matrix_indicators_keymap()) {
+        return false;
+    }
+
+    return true;
+}
+
+__attribute__((weak)) bool rgb_matrix_indicators_keymap(void) { return true; }
 #endif
