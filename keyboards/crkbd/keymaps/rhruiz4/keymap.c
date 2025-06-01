@@ -218,7 +218,6 @@ bool rgb_matrix_indicators_keymap(void) {
         case _GAMEFN1:
             if (is_keyboard_left()) {
                 rgb_matrix_set_color(7, 0x0f, 0xff, 0xfb);
-                return true;
             }
             break;
 
@@ -229,30 +228,53 @@ bool rgb_matrix_indicators_keymap(void) {
             break;
 
         case _AUG:
-            if (is_keyboard_left()) {
-                rgb_matrix_set_color(7, RGB_GREEN);
-                return true;
-            } else {
-                rgb_matrix_set_color(30, RGB_GREEN);
-            }
+            rgb_matrix_set_color(7, RGB_GREEN);
             break;
     }
 
-    if (!is_keyboard_left()) {
-        if (layer_state_is(_CFG)) {
-            uint8_t bl1 = g_led_config.matrix_co[5][3];
-            uint8_t bl0 = g_led_config.matrix_co[5][4];
-            rgb_matrix_set_color(bl1, 0, 0, 0);
-            rgb_matrix_set_color(bl0, 0, 0, 0);
-            rgb_matrix_set_color(26, 0xb7, 0x00, 0xff);
-            rgb_matrix_set_color(g_led_config.matrix_co[5][3 + default_layer_index()], 255, 255, 255);
+    if (is_keyboard_left()) {
+#       if defined(CAPS_WORD_ENABLE)
+        if (caps_word_enabled()) {
+            rgb_matrix_set_color(9, 64, 0, 0);
+        }
+#       endif
 
-            rgb_matrix_set_color(g_led_config.matrix_co[5][2], nav_keys_index() * 148, nav_keys_index() * 255, 255);
+        if (layer_state_is(_NUM)) {
+            rgb_matrix_set_color(5, RGB_PURPLE);
+            rgb_matrix_set_color(10, RGB_PURPLE);
+            rgb_matrix_set_color(11, RGB_PURPLE);
+            rgb_matrix_set_color(13, RGB_PURPLE);
+        }
+    } else {
+        if (layer_state_is(_CFG)) {
+            rgb_matrix_set_color(26, 0xb7, 0x00, 0xff);
+
+            rgb_matrix_set_color(5, RGB_OFF);
+            rgb_matrix_set_color(10, RGB_OFF);
+            rgb_matrix_set_color(10 - default_layer_index() * 5, 255, 255, 255);
+
+            if (nav_keys_index() == 0) {
+                rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_WHITE);
+            } else {
+                rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_TEAL);
+            }
+
         }
 
 
         if (layer_state_is(_NUM)) {
             rgb_matrix_set_color(g_led_config.matrix_co[4][6], 64, 0, 0);
+
+            rgb_matrix_set_color(4, 140, 40, 0);
+            rgb_matrix_set_color(5, 140, 40, 0);
+            rgb_matrix_set_color(6, 140, 40, 0);
+            rgb_matrix_set_color(7, 140, 40, 0);
+            rgb_matrix_set_color(9, 140, 40, 0);
+            rgb_matrix_set_color(10, 140, 40, 0);
+            rgb_matrix_set_color(11, 140, 40, 0);
+            rgb_matrix_set_color(12, 140, 40, 0);
+            rgb_matrix_set_color(13, 140, 40, 0);
+            rgb_matrix_set_color(14, 140, 40, 0);
         }
     }
 
