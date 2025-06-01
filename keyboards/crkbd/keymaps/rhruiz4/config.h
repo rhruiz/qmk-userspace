@@ -22,23 +22,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define BASE_LAYERS _QWER, _CODH
 
-#define PRO_MICRO
-#define BLINK_LED_PIN B0
-#define EE_HANDS
+#if defined(QMK_MCU_ATMEGA32U4)
+#    define PRO_MICRO
+#    define BLINK_LED_PIN B0
+#    define EE_HANDS
+#endif
 
 #ifdef OLED_ENABLE
 #    define OLED_BRIGHTNESS 8
 #endif
 
-#if defined(CONVERT_TO_PROMICRO_RP2040)
-#    if defined(RGBLIGHT_ENABLE)
-#        define RGBLIGHT_EFFECT_RAINBOW_MOOD
-#        undef RGB_DI_PIN
-#        undef RGBLIGHT_LED_COUNT
-#        undef RGBLED_SPLIT
-#        define RGB_DI_PIN 25U
-#        define RGBLIGHT_LED_COUNT 1
-#    endif
+#if defined(CONVERT_TO_PROMICRO_RP2040) && defined(RGBLIGHT_ENABLE)
+#   define RGBLIGHT_EFFECT_RAINBOW_MOOD
+#   undef RGB_DI_PIN
+#   undef RGBLIGHT_LED_COUNT
+#   define RGBLIGHT_LED_COUNT 1
+#endif
+
+#if defined(RGBLIGHT_ENABLE)
+#    define RGBLIGHT_LAYERS
+#    define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
+#    define RGBLIGHT_LAYER_BLINK
+#    define RGBLIGHT_LAYERS_RETAIN_VAL
+#    define RGBLIGHT_MAX_LAYERS 11
 #endif
 
 // bootmagic
