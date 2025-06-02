@@ -249,7 +249,6 @@ bool rgb_matrix_indicators_keymap(void) {
         if (layer_state_is(_FUNC)) {
             rgb_matrix_set_color(5, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(10, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(11, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
         }
