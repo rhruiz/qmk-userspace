@@ -245,6 +245,14 @@ bool rgb_matrix_indicators_keymap(void) {
             rgb_matrix_set_color(11, RGB_PURPLE);
             rgb_matrix_set_color(13, RGB_PURPLE);
         }
+
+        if (layer_state_is(_FUNC)) {
+            rgb_matrix_set_color(5, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(10, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(11, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
+        }
     } else {
         if (layer_state_is(_CFG)) {
             rgb_matrix_set_color(26, 0xb7, 0x00, 0xff);
@@ -259,6 +267,21 @@ bool rgb_matrix_indicators_keymap(void) {
                 rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_TEAL);
             }
 
+        }
+
+        if (layer_state_is(_FUNC)) {
+            rgb_matrix_set_color(4, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(5, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(6, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(9, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(10, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(11, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(12, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(14, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(15, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(17, 0x47, 0xa7, 0xed);
         }
 
 
