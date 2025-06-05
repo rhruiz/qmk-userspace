@@ -24,6 +24,7 @@ const uint16_t nav_keys[][NUM_NAV_KEYS_OSES] PROGMEM = {
     [NV_WSCH - NV_START] = {SCMD(KC_4), KC_PSCR},
     [NV_1MOD - NV_START] = {KC_LGUI, KC_LCTL},
     [NV_2MOD - NV_START] = {KC_LCTL, KC_LGUI},
+    [NV_DELW - NV_START] = {LOPT(KC_BSPC), LCTL(KC_BSPC)},
 };
 
 #ifdef HOME_ROW_MODS

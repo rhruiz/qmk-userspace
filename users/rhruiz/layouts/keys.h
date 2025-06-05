@@ -39,7 +39,8 @@ typedef enum custom_keycodes {
     NV_WSCH, // window screenshot
     NV_1MOD, // main modifier (cmd on mac, ctrl on linux/windows)
     NV_2MOD, // ctrl on mac, gui on linux/windows
-    NV_END = NV_2MOD,
+    NV_DELW, // delete word
+    NV_END = NV_DELW,
     KC_CTAB, // window switcher
     NV_NWIN, // next window
     USER_SAFE_RANGE
