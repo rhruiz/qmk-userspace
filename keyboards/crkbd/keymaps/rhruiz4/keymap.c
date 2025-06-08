@@ -4,6 +4,9 @@
 #    include "thumbstick.h"
 #endif
 
+#define SWAP_SIDE(K1, K2, K3, K4, K5) K5, K2, K3, K4, K1
+#define SWSD(...) SWAP_SIDE(__VA_ARGS__)
+
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
 const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1, 127, 255, 255});
 const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({30, 1, 21, 255, 255});
@@ -34,7 +37,7 @@ const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1
   ) \
   LAYOUT_split_3x6_3_wrapper_ex2( \
 /*  ,-----------------------------------------------.   ,-----------------------------------------------.*/ \
-      KC_TAB ,   L01  , L02, L03, L04, L05 ,  KC_NO ,     TG_NUM ,   R01  , R02, R03, R04, R05 , KC_BSPC, \
+      KC_TAB ,   L01  , L02, L03, L04, L05 , TG_NUML,     TG_NUM ,   R01  , R02, R03, R04, R05 , KC_BSPC, \
 /*  |--------+--------+----+----+----+-----+--------|   |--------+--------+----+----+-----+----+--------|*/ \
       CT_ESC , HRL(L11, L12, L13, L14, L15),  KC_NO ,     EE_CLR , HRR(R11, R12, R13, R14, R15), KC_QUOT, \
 /*  |--------+--------+----+----+----+-----+--------.   `--------+--------+----+----+----+-----+--------|*/ \
@@ -51,7 +54,7 @@ const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1
   ) \
   LAYOUT_split_3x6_3_ex2_wrapper( \
 /*  ,-----------------------------------------------.   ,-----------------------------------------------.*/ \
-      KC_TAB ,   L01  , L02, L03, L04, L05 ,  KC_NO ,     TG_NUM ,   R01  , R02, R03, R04, R05 , KC_BSPC, \
+      KC_TAB ,   L01  , L02, L03, L04, L05 , TG_NUML,     TG_NUM ,   R01  , R02, R03, R04, R05 , KC_BSPC, \
 /*  |--------+--------+----+----+----+-----+--------|   |--------+--------+----+----+-----+----+--------|*/ \
       CT_ESC , HRL(L11, L12, L13, L14, L15),  KC_NO ,      KC_NO , HRR(R11, R12, R13, R14, R15), KC_QUOT, \
 /*  |--------+--------+----+----+----+-----+--------.   `--------+--------+----+----+----+-----+--------|*/ \
@@ -171,6 +174,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //         `--------+--------+--------'                     `--------+--------+--------'
     ),
 
+  [_NUML] = LAYOUT_split_3x6_3_ex2_wrapper(
+//,--------------------------------------------------.   ,--------------------------------------------------.
+    _______,  SWSD(________R_NUM_1________) , TG_NUML,     TG_NUM ,  SWSD(________L_NUM_2________) , _______,
+//|--------+--------------------------------+--------|   |--------+--------------------------------+--------|
+    _______,  SWSD(________R_NUM_2________) , KC_ENT ,      KC_NO ,  SWSD(________L_NUM_3________) , TG_NUM ,
+//|--------+--------------------------------+--------.   `--------+--------------------------------+--------|
+    _______,  SWSD(________R_NUM_3________) ,                        SWSD(________L_NUM_4________) , _______,
+//`--------+--------------------------------|                     |--------------------------------+--------'
+                    GT_BS ,LT_LWR_0, _______,                       MS_BTN1, _______, MS_BTN2
+//               `--------+--------+--------'                     `--------+--------+--------'
+    ),
+
   [_FUNC] = LAYOUT_split_3x6_3_wrapper(
 //,-----------------------------------.  ,-----------------------------------.
     _______,  ________L_FUN_2________ ,     ________R_FUN_2________ , _______,
@@ -252,6 +267,21 @@ bool rgb_matrix_indicators_keymap(void) {
             rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
         }
+
+        if (layer_state_is(_NUML)) {
+            rgb_matrix_set_color(g_led_config.matrix_co[0][6], 64, 0, 0);
+
+            rgb_matrix_set_color(4, 140, 40, 0);
+            rgb_matrix_set_color(5, 140, 40, 0);
+            rgb_matrix_set_color(6, 140, 40, 0);
+            rgb_matrix_set_color(7, 140, 40, 0);
+            rgb_matrix_set_color(9, 140, 40, 0);
+            rgb_matrix_set_color(10, 140, 40, 0);
+            rgb_matrix_set_color(11, 140, 40, 0);
+            rgb_matrix_set_color(12, 140, 40, 0);
+            rgb_matrix_set_color(13, 140, 40, 0);
+            rgb_matrix_set_color(14, 140, 40, 0);
+        }
     } else {
         if (layer_state_is(_CFG)) {
             rgb_matrix_set_color(26, 0xb7, 0x00, 0xff);
@@ -297,6 +327,13 @@ bool rgb_matrix_indicators_keymap(void) {
             rgb_matrix_set_color(12, 140, 40, 0);
             rgb_matrix_set_color(13, 140, 40, 0);
             rgb_matrix_set_color(14, 140, 40, 0);
+        }
+
+        if (layer_state_is(_NUML)) {
+            rgb_matrix_set_color(5, RGB_PURPLE);
+            rgb_matrix_set_color(10, RGB_PURPLE);
+            rgb_matrix_set_color(11, RGB_PURPLE);
+            rgb_matrix_set_color(13, RGB_PURPLE);
         }
     }
 

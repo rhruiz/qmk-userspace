@@ -1,7 +1,7 @@
 #pragma once
 #include "quantum/quantum_keycodes.h"
 
-typedef enum rhruiz_layers { _QWER, _CODH, _GAME, _NUM, _FN1, _FN2, _GAMEFN1, _AUG, _CFG, _FUNC } rhruiz_layers;
+typedef enum rhruiz_layers { _QWER, _CODH, _GAME, _NUM, _NUML, _FN1, _FN2, _GAMEFN1, _AUG, _CFG, _FUNC } rhruiz_layers;
 
 typedef enum custom_keycodes {
     // macro keys
@@ -77,9 +77,11 @@ typedef enum custom_keycodes {
 #define LT_LWR_SPC LT(_FN1, KC_SPC)
 #define LT_RSE_ENT LT(_FN2, KC_ENTER)
 #define LT_RSE_0 LT(_FN2, KC_0)
+#define LT_LWR_0 LT(_FN1, KC_0)
 
 // layer toggle
 #define TG_NUM TG(_NUM)
+#define TG_NUML TG(_NUML)
 #define TG_GAME TG(_GAME)
 #define TG_CFG TG(_CFG)
 #define TG_LWR TG(_FN1)
