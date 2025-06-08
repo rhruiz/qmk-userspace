@@ -247,6 +247,57 @@ bool rgb_matrix_indicators_keymap(void) {
             break;
     }
 
+    if ((is_keyboard_left() && layer_state_is(_NUM)) ||
+        (!is_keyboard_left() && layer_state_is(_NUML))) {
+        rgb_matrix_set_color(5, RGB_PURPLE);
+        rgb_matrix_set_color(10, RGB_PURPLE);
+        rgb_matrix_set_color(11, RGB_PURPLE);
+        rgb_matrix_set_color(13, RGB_PURPLE);
+    }
+
+    if ((!is_keyboard_left() && layer_state_is(_NUM)) ||
+        (is_keyboard_left() && layer_state_is(_NUML))) {
+        rgb_matrix_set_color(21, 64, 0, 0);
+
+        rgb_matrix_set_color(4, 140, 40, 0);
+        rgb_matrix_set_color(5, 140, 40, 0);
+        rgb_matrix_set_color(6, 140, 40, 0);
+        rgb_matrix_set_color(7, 140, 40, 0);
+        rgb_matrix_set_color(9, 140, 40, 0);
+        rgb_matrix_set_color(10, 140, 40, 0);
+        rgb_matrix_set_color(11, 140, 40, 0);
+        rgb_matrix_set_color(12, 140, 40, 0);
+        rgb_matrix_set_color(13, 140, 40, 0);
+        rgb_matrix_set_color(14, 140, 40, 0);
+    }
+
+#   if defined(HOME_ROW_MODS)
+    uint8_t mods = mod_config(get_mods());
+#   ifndef NO_ACTION_ONESHOT
+    mods |= mod_config(get_oneshot_mods());
+#   endif
+
+    if (!is_keyboard_left()) {
+        mods = mods >> 4;
+    }
+
+    uint8_t nav_index = nav_keys_index();
+
+    if (mods & MOD_BIT(KC_LGUI)) {
+        rgb_matrix_set_color(5 + 11 * nav_index, RGB_PURPLE);
+    }
+    if (mods & MOD_BIT(KC_LCTL)) {
+        rgb_matrix_set_color(16 - 11 * nav_index, RGB_TEAL);
+    }
+    if (mods & MOD_BIT(KC_LSFT)) {
+        rgb_matrix_set_color(13, RGB_RED);
+    }
+    if (mods & MOD_BIT(KC_LALT)) {
+        rgb_matrix_set_color(10, RGB_SPRINGGREEN);
+    }
+#   endif
+
+
     if (is_keyboard_left()) {
 #       if defined(CAPS_WORD_ENABLE)
         if (caps_word_enabled()) {
@@ -254,33 +305,11 @@ bool rgb_matrix_indicators_keymap(void) {
         }
 #       endif
 
-        if (layer_state_is(_NUM)) {
-            rgb_matrix_set_color(5, RGB_PURPLE);
-            rgb_matrix_set_color(10, RGB_PURPLE);
-            rgb_matrix_set_color(11, RGB_PURPLE);
-            rgb_matrix_set_color(13, RGB_PURPLE);
-        }
-
         if (layer_state_is(_FUNC)) {
             rgb_matrix_set_color(5, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(10, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
-        }
-
-        if (layer_state_is(_NUML)) {
-            rgb_matrix_set_color(g_led_config.matrix_co[0][6], 64, 0, 0);
-
-            rgb_matrix_set_color(4, 140, 40, 0);
-            rgb_matrix_set_color(5, 140, 40, 0);
-            rgb_matrix_set_color(6, 140, 40, 0);
-            rgb_matrix_set_color(7, 140, 40, 0);
-            rgb_matrix_set_color(9, 140, 40, 0);
-            rgb_matrix_set_color(10, 140, 40, 0);
-            rgb_matrix_set_color(11, 140, 40, 0);
-            rgb_matrix_set_color(12, 140, 40, 0);
-            rgb_matrix_set_color(13, 140, 40, 0);
-            rgb_matrix_set_color(14, 140, 40, 0);
         }
     } else {
         if (layer_state_is(_CFG)) {
@@ -295,7 +324,6 @@ bool rgb_matrix_indicators_keymap(void) {
             } else {
                 rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_TEAL);
             }
-
         }
 
         if (layer_state_is(_FUNC)) {
@@ -311,29 +339,6 @@ bool rgb_matrix_indicators_keymap(void) {
             rgb_matrix_set_color(15, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
             rgb_matrix_set_color(17, 0x47, 0xa7, 0xed);
-        }
-
-
-        if (layer_state_is(_NUM)) {
-            rgb_matrix_set_color(g_led_config.matrix_co[4][6], 64, 0, 0);
-
-            rgb_matrix_set_color(4, 140, 40, 0);
-            rgb_matrix_set_color(5, 140, 40, 0);
-            rgb_matrix_set_color(6, 140, 40, 0);
-            rgb_matrix_set_color(7, 140, 40, 0);
-            rgb_matrix_set_color(9, 140, 40, 0);
-            rgb_matrix_set_color(10, 140, 40, 0);
-            rgb_matrix_set_color(11, 140, 40, 0);
-            rgb_matrix_set_color(12, 140, 40, 0);
-            rgb_matrix_set_color(13, 140, 40, 0);
-            rgb_matrix_set_color(14, 140, 40, 0);
-        }
-
-        if (layer_state_is(_NUML)) {
-            rgb_matrix_set_color(5, RGB_PURPLE);
-            rgb_matrix_set_color(10, RGB_PURPLE);
-            rgb_matrix_set_color(11, RGB_PURPLE);
-            rgb_matrix_set_color(13, RGB_PURPLE);
         }
     }
 
