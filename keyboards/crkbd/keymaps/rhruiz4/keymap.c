@@ -284,11 +284,11 @@ bool rgb_matrix_indicators_keymap(void) {
         }
     } else {
         if (layer_state_is(_CFG)) {
-            rgb_matrix_set_color(26, 0xb7, 0x00, 0xff);
+            rgb_matrix_set_color(3, 0xb7, 0x00, 0xff);
 
             rgb_matrix_set_color(5, RGB_OFF);
             rgb_matrix_set_color(10, RGB_OFF);
-            rgb_matrix_set_color(10 - default_layer_index() * 5, 255, 255, 255);
+            rgb_matrix_set_color(g_led_config.matrix_co[1][3 + default_layer_index()], 255, 255, 255);
 
             if (nav_keys_index() == 0) {
                 rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_WHITE);

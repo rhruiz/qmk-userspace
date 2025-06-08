@@ -2,6 +2,7 @@
 
 typedef struct _rhruiz_runtime_state {
     uint8_t nav_keys_index;
+    uint8_t base_layer_index;
 #ifdef SPLIT_KEYBOARD
     bool needs_runtime_state_sync;
 #   ifdef CAPS_WORD_ENABLE
@@ -12,6 +13,13 @@ typedef struct _rhruiz_runtime_state {
 
 rhruiz_runtime_state_t runtime_state;
 
+uint8_t default_layer_index(void) {
+    return runtime_state.base_layer_index;
+}
+
+void set_default_layer_index(uint8_t index) {
+    runtime_state.base_layer_index = index;
+}
 
 void reset_runtime_state(void) {
     runtime_state = (rhruiz_runtime_state_t) {
