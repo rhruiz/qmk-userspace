@@ -362,9 +362,13 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
     }
 #endif
 #if defined(RGB_MATRIX_ENABLE)
-    if (layer_state_cmp(state, _GAME)) {
+    if (!layer_state_is(_GAME) && layer_state_cmp(state, _GAME)) {
         rgb_matrix_reload_from_eeprom();
-    } else if (layer_state_cmp(layer_state, _GAME)) {
+        rgb_matrix_enable_noeeprom();
+    }
+
+    if (layer_state_is(_GAME) && !layer_state_cmp(state, _GAME)) {
+        rgb_matrix_enable_noeeprom();
         rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
         rgb_matrix_sethsv_noeeprom(HSV_OFF);
     }
@@ -376,6 +380,7 @@ void keyboard_post_init_keymap() {
 #if defined(RGB_MATRIX_ENABLE)
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    rgb_matrix_enable_noeeprom();
 #endif
 #if defined(RGBLIGHT_LAYERS)
     rgblight_layers = _rgb_layers;
