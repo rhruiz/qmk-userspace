@@ -238,7 +238,7 @@ bool rgb_matrix_indicators_keymap(void) {
 
         case _FN2:
             if (!is_keyboard_left()) {
-                rgb_matrix_set_color(30, 0xff, 0x7b, 0x00);
+                rgb_matrix_set_color(30, 0xff, 0x99, 0x00);
             }
             break;
 
