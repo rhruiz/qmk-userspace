@@ -7,7 +7,7 @@ void rhruiz_rgblight_reset(void) {
 #endif
 }
 
-void rhruiz_change_leds_to(uint16_t hue, uint8_t sat) {
+void rhruiz_change_leds_to(uint8_t hue, uint8_t sat) {
     rgblight_config_t eeprom_config;
     eeconfig_read_rgblight(&eeprom_config);
 

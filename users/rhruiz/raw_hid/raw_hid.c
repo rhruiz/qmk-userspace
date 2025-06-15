@@ -58,10 +58,17 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
         }
 
         case id_rgblight_color: {
-#ifdef RGBLIGHT_ENABLE
-            uint16_t hue = ((uint16_t)command_data[0] << 8) | command_data[1];
-            uint8_t  sat = command_data[2];
+#if defined(RGBLIGHT_ENABLE)
+            uint16_t hue = command_data[0];
+            uint8_t sat = command_data[1];
             rhruiz_change_leds_to(hue, sat);
+#endif
+#if defined(RGB_MATRIX_ENABLE)
+            uint8_t hue = command_data[0];
+            uint8_t sat = command_data[1];
+            rgb_matrix_enable_noeeprom();
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            rgb_matrix_sethsv_noeeprom(hue, sat, RGB_MATRIX_DEFAULT_VAL);
 #endif
             break;
         }
