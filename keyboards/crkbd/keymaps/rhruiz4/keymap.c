@@ -8,17 +8,17 @@
 #define SWSD(...) SWAP_SIDE(__VA_ARGS__)
 
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1, 127, 255, 255});
-const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({30, 1, 21, 255, 255});
-const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1,  85, 255, 255}, {30, 1, 85, 255, 255});
-const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({26, 1, 201, 255, 255});
-const rgblight_segment_t PROGMEM num_colors[] = RGBLIGHT_LAYER_SEGMENTS({44, 1, 0, 255, 255});
-const rgblight_segment_t PROGMEM fun_colors[] = RGBLIGHT_LAYER_SEGMENTS({27, 3, 0, 255, 255}, {32, 9, 0, 255, 255});
-const rgblight_segment_t PROGMEM caps_colors[] = RGBLIGHT_LAYER_SEGMENTS({14, 8, 201, 255, 255});
-const rgblight_segment_t PROGMEM qwerty_colors[] = RGBLIGHT_LAYER_SEGMENTS({33, 1, 43, 255, 255});
-const rgblight_segment_t PROGMEM colemak_dh_colors[] = RGBLIGHT_LAYER_SEGMENTS({28, 1, 180, 255, 255});
-const rgblight_segment_t PROGMEM mac_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, 0, 0, 255});
-const rgblight_segment_t PROGMEM win_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, 148, 255, 255});
+const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1, LWR_HSV});
+const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({30, 1, RSE_HSV});
+const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1,  AUG_HSV}, {30, 1, AUG_HSV});
+const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({26, 1, CFG_HSV});
+const rgblight_segment_t PROGMEM num_colors[] = RGBLIGHT_LAYER_SEGMENTS({44, 1, NUM_HSV});
+const rgblight_segment_t PROGMEM fun_colors[] = RGBLIGHT_LAYER_SEGMENTS({27, 3, FUN_HSV}, {32, 9, FUN_HSV});
+const rgblight_segment_t PROGMEM caps_colors[] = RGBLIGHT_LAYER_SEGMENTS({14, 8, CAPS_HSV});
+const rgblight_segment_t PROGMEM qwerty_colors[] = RGBLIGHT_LAYER_SEGMENTS({33, 1, QWERTY_HSV});
+const rgblight_segment_t PROGMEM colemak_dh_colors[] = RGBLIGHT_LAYER_SEGMENTS({28, 1, COLEMAK_HSV});
+const rgblight_segment_t PROGMEM mac_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, MAC_HSV});
+const rgblight_segment_t PROGMEM win_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, WIN_HSV});
 
 const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, aug_colors, cfg_colors, num_colors, fun_colors, caps_colors, qwerty_colors, colemak_dh_colors, mac_colors, win_colors);
 #endif
@@ -232,18 +232,18 @@ bool rgb_matrix_indicators_keymap(void) {
         case _FN1:
         case _GAMEFN1:
             if (is_keyboard_left()) {
-                rgb_matrix_set_color(7, 0x0f, 0xff, 0xfb);
+                rgb_matrix_set_color(7, LWR_RGB);
             }
             break;
 
         case _FN2:
             if (!is_keyboard_left()) {
-                rgb_matrix_set_color(30, 0xff, 0x99, 0x00);
+                rgb_matrix_set_color(30, RSE_RGB);
             }
             break;
 
         case _AUG:
-            rgb_matrix_set_color(7, RGB_GREEN);
+            rgb_matrix_set_color(7, AUG_RGB);
             break;
     }
 
@@ -259,16 +259,16 @@ bool rgb_matrix_indicators_keymap(void) {
         (is_keyboard_left() && layer_state_is(_NUML))) {
         rgb_matrix_set_color(21, 64, 0, 0);
 
-        rgb_matrix_set_color(4, 140, 40, 0);
-        rgb_matrix_set_color(5, 140, 40, 0);
-        rgb_matrix_set_color(6, 140, 40, 0);
-        rgb_matrix_set_color(7, 140, 40, 0);
-        rgb_matrix_set_color(9, 140, 40, 0);
-        rgb_matrix_set_color(10, 140, 40, 0);
-        rgb_matrix_set_color(11, 140, 40, 0);
-        rgb_matrix_set_color(12, 140, 40, 0);
-        rgb_matrix_set_color(13, 140, 40, 0);
-        rgb_matrix_set_color(14, 140, 40, 0);
+        rgb_matrix_set_color(4, NUN_RGB);
+        rgb_matrix_set_color(5, NUN_RGB);
+        rgb_matrix_set_color(6, NUN_RGB);
+        rgb_matrix_set_color(7, NUN_RGB);
+        rgb_matrix_set_color(9, NUN_RGB);
+        rgb_matrix_set_color(10, NUN_RGB);
+        rgb_matrix_set_color(11, NUN_RGB);
+        rgb_matrix_set_color(12, NUN_RGB);
+        rgb_matrix_set_color(13, NUN_RGB);
+        rgb_matrix_set_color(14, NUN_RGB);
     }
 
 #   if defined(HOME_ROW_MODS)
@@ -301,44 +301,48 @@ bool rgb_matrix_indicators_keymap(void) {
     if (is_keyboard_left()) {
 #       if defined(CAPS_WORD_ENABLE)
         if (caps_word_enabled()) {
-            rgb_matrix_set_color(9, 64, 0, 0);
+            rgb_matrix_set_color(9, CAPS_RGB);
         }
 #       endif
 
         if (layer_state_is(_FUNC)) {
-            rgb_matrix_set_color(5, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(10, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(5, FUN_RGB);
+            rgb_matrix_set_color(10, FUN_RGB);
+            rgb_matrix_set_color(13, FUN_RGB);
+            rgb_matrix_set_color(16, FUN_RGB);
         }
     } else {
         if (layer_state_is(_CFG)) {
-            rgb_matrix_set_color(3, 0xb7, 0x00, 0xff);
+            rgb_matrix_set_color(3, CFG_RGB);
 
-            rgb_matrix_set_color(5, RGB_OFF);
-            rgb_matrix_set_color(10, RGB_OFF);
-            rgb_matrix_set_color(g_led_config.matrix_co[1][3 + default_layer_index()], 255, 255, 255);
+            if (default_layer_index()) {
+                rgb_matrix_set_color(10, RGB_OFF);
+                rgb_matrix_set_color(g_led_config.matrix_co[1][4], COLEMAK_RGB);
+            } else {
+                rgb_matrix_set_color(5, RGB_OFF);
+                rgb_matrix_set_color(g_led_config.matrix_co[1][3], QWERTY_RGB);
+            }
 
             if (nav_keys_index() == 0) {
-                rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_WHITE);
+                rgb_matrix_set_color(g_led_config.matrix_co[5][2], MAC_RGB);
             } else {
-                rgb_matrix_set_color(g_led_config.matrix_co[5][2], RGB_TEAL);
+                rgb_matrix_set_color(g_led_config.matrix_co[5][2], WIN_RGB);
             }
         }
 
         if (layer_state_is(_FUNC)) {
-            rgb_matrix_set_color(4, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(5, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(6, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(9, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(10, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(11, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(12, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(13, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(14, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(15, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(16, 0x47, 0xa7, 0xed);
-            rgb_matrix_set_color(17, 0x47, 0xa7, 0xed);
+            rgb_matrix_set_color(4, FUN_RGB);
+            rgb_matrix_set_color(5, FUN_RGB);
+            rgb_matrix_set_color(6, FUN_RGB);
+            rgb_matrix_set_color(9, FUN_RGB);
+            rgb_matrix_set_color(10, FUN_RGB);
+            rgb_matrix_set_color(11, FUN_RGB);
+            rgb_matrix_set_color(12, FUN_RGB);
+            rgb_matrix_set_color(13, FUN_RGB);
+            rgb_matrix_set_color(14, FUN_RGB);
+            rgb_matrix_set_color(15, FUN_RGB);
+            rgb_matrix_set_color(16, FUN_RGB);
+            rgb_matrix_set_color(17, FUN_RGB);
         }
     }
 

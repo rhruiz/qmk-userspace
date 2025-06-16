@@ -4,6 +4,7 @@
 #include "keymap_callbacks/keymap_callbacks.h"
 #include "layouts/keys.h"
 #include "layouts/wrappers.h"
+#include "colors.h"
 
 #if defined(RGBLIGHT_ENABLE)
 #include "rgblight/rgblight.h"
