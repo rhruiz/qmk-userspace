@@ -2,6 +2,7 @@
     "userspace_version": "1.0",
     "build_targets": [
         ["crkbd/rev1", "rhruiz"],
+        ["crkbd/rev4_1/standard", "rhruiz4"],
         ["lily58/rev1", "rhruiz"],
         ["keebio/laplace", "rhruiz"],
         ["keebio/viterbi/rev1", "rhruiz"],

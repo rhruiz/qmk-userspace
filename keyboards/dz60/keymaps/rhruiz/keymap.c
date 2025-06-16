@@ -9,10 +9,10 @@
 enum rhruiz_keys { KC_KBVSN = SAFE_RANGE };
 
 #ifdef RGBLIGHT_LAYERS
-const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 127, 255, 255}, {7, 1, 127, 255, 255});
-const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 21, 255, 255}, {7, 1, 21, 255, 255});
-const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 85, 255, 255}, {7, 1, 85, 255, 255});
-const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 201, 255, 255}, {7, 1, 201, 255, 255});
+const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 127, 255, 255}, {7, 1, LWR_HSV});
+const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 21, 255, 255}, {7, 1, RSE_HSV});
+const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 85, 255, 255}, {7, 1, AUG_HSV});
+const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, 201, 255, 255}, {7, 1, CFG_HSV});
 
 const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, aug_colors, cfg_colors);
 #endif
