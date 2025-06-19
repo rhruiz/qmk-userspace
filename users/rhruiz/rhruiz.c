@@ -13,6 +13,29 @@ uint8_t mod_config(uint8_t mod) {
 }
 #endif
 
+
+bool shutdown_user(bool jump_to_bootloader) {
+    if (!shutdown_keymap(jump_to_bootloader)) {
+        return false;
+    }
+
+    if (!jump_to_bootloader) {
+        return true;
+    }
+#ifdef OLED_ENABLE
+    oled_on();
+    oled_clear();
+    oled_write_P(PSTR("\n\n\n BOOT\n\n LOAD"), false);
+    oled_render_dirty(true);
+#endif
+#ifdef RGB_MATRIX_ENABLE
+    rgb_matrix_enable_noeeprom();
+    rgb_matrix_set_color_all(RGB_RED);
+    rgb_matrix_update_pwm_buffers();
+#endif
+    return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!(process_record_keymap(keycode, record)
         && process_record_nav(keycode, record)

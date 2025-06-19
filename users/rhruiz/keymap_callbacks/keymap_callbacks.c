@@ -21,6 +21,10 @@ __attribute__((weak)) void suspend_power_down_keymap(void) {}
 
 __attribute__((weak)) void suspend_wakeup_init_keymap(void) {}
 
+__attribute__((weak)) bool shutdown_keymap(bool jump_to_bootloader) {
+    return true;
+}
+
 #ifdef OLED_ENABLE
 __attribute__((weak)) bool oled_task_keymap(void) { return true; }
 #endif
