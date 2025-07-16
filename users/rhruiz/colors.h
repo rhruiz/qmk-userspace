@@ -3,8 +3,8 @@
 #define LWR_HSV 127, 255, 255
 #define LWR_RGB 0x0f, 0xff, 0xfb
 
-#define RSE_HSV 21, 255, 255
-#define RSE_RGB 0xff, 0x99, 0x00
+#define RSE_HSV 7, 255, 255
+#define RSE_RGB 0xff, 0x2a, 0x00
 
 #define AUG_HSV 85, 255, 255
 #define AUG_RGB RGB_GREEN
