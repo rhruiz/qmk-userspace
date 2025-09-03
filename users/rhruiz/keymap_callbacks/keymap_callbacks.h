@@ -12,6 +12,9 @@ void caps_word_set_keymap(bool active);
 void suspend_power_down_keymap(void);
 void suspend_wakeup_init_keymap(void);
 bool shutdown_keymap(bool jump_to_bootloader);
+#ifdef ENCODER_ENABLE
+bool encoder_update_keymap(uint8_t index, bool clockwise);
+#endif
 #ifdef OLED_ENABLE
 bool oled_task_keymap(void);
 #endif

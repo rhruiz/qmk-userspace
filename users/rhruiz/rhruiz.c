@@ -164,6 +164,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
+#ifdef ENCODER_ENABLE
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (!encoder_update_keymap(index, clockwise)) {
+        return false;
+    }
+
+    return true;
+}
+#endif
+
 void suspend_power_down_user(void) {
 #if defined(OLED_ENABLE)
     oled_off();

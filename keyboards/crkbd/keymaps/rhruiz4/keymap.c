@@ -23,7 +23,6 @@ const rgblight_segment_t PROGMEM win_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, 
 const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, aug_colors, cfg_colors, num_colors, fun_colors, caps_colors, qwerty_colors, colemak_dh_colors, mac_colors, win_colors);
 #endif
 
-
 // clang-format off
 #define LAYOUT_base_wrapper(...) LAYOUT_base(__VA_ARGS__)
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT_split_3x6_3(__VA_ARGS__)
