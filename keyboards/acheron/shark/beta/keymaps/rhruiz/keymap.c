@@ -245,7 +245,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 #ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t _index, bool clockwise) {
+bool encoder_update_keymap(uint8_t _index, bool clockwise) {
     int index = clockwise ? 1 : 0;
     void (*handler) (void) = *rhruiz_encoder_handlers[_current_encoder_mode][index];
     handler();
