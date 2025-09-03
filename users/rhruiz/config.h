@@ -30,6 +30,8 @@
 #define HOME_ROW_MODS
 #define PERMISSIVE_HOLD
 
+#define FLOW_TAP_TERM 100
+
 // Mouse key speed and acceleration.
 #undef MOUSEKEY_DELAY
 #define MOUSEKEY_DELAY 0
