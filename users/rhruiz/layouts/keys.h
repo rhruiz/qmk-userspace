@@ -43,6 +43,7 @@ typedef enum custom_keycodes {
     NV_END = NV_DELW,
     KC_CTAB, // window switcher
     NV_NWIN, // next window
+    KC_GLBE,
     USER_SAFE_RANGE
 } rhruiz_keycodes;
 
