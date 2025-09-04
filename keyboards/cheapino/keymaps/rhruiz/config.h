@@ -22,6 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define BASE_LAYERS _QWER, _CODH
 
+#ifdef ENCODER_ENABLE
+#define ENCODER_DIRECTION_FLIP
+#endif
+
 #if defined(RGBLIGHT_ENABLE)
 #    define RGBLIGHT_LAYERS
 #    define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF

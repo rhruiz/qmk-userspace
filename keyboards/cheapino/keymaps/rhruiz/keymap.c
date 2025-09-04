@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|--------------------------|  |--------------------------|
      ________L_NUM_4________ ,     ________R_NUM_3________ ,
 //|--------------------------|  |--------------------------|
-                             TO_NUM,
+                             TG_NUM,
     MS_BTN2, _______, MS_BTN1,    _______,LT_RSE_0, AT_TAB
 //`--------+--------+--------'  `--------+--------+--------'
     ),
@@ -157,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|--------------------------------'  |--------------------------------|
      REV5(________R_NUM_3________) ,     REV5(________L_NUM_4________) ,
 //`--------------------------------|  |--------------------------------'
-                                   TO_NUM,
+                                  TG_NUML,
            GT_BS ,LT_LWR_0, _______,    MS_BTN1, _______, MS_BTN2
 //      `--------+--------+--------'  `--------+--------+--------'
     ),
@@ -243,6 +243,22 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 
 #ifdef ENCODER_ENABLE
+#    ifdef ENCODER_MAP_ENABLE
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [_QWER]    = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [_CODH]    = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [_GAME]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_GAMEFN1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_FN1]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_FN2]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_AUG]     = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [_CFG]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_NUM]     = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [_NUML]    = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [_FUNC]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+};
+#    endif
+#    ifndef ENCODER_MAP_ENABLE
 bool encoder_update_keymap(uint8_t _index, bool clockwise) {
     switch (get_highest_layer(default_layer_state)) {
         case _QWER:
@@ -277,4 +293,5 @@ bool encoder_update_keymap(uint8_t _index, bool clockwise) {
 
     return true;
 }
+#    endif
 #endif
