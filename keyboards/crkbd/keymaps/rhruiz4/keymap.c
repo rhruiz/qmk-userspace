@@ -379,10 +379,24 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
     return state;
 }
 
-void keyboard_post_init_keymap() {
-#if defined(RGB_MATRIX_ENABLE)
+#if defined(RGB_MATRIX_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
+uint32_t disable_boot_rgb(uint32_t next_trigger_time, void *cb_arg) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    return 0;
+}
+#endif
+
+void keyboard_post_init_keymap() {
+#if defined(RGB_MATRIX_ENABLE)
+    #if defined(DEFERRED_EXEC_ENABLE)
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+    rgb_matrix_set_speed_noeeprom(128);
+    defer_exec(2000, disable_boot_rgb, NULL);
+    #else
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    #endif
     rgb_matrix_enable_noeeprom();
 #endif
 #if defined(RGBLIGHT_LAYERS)
