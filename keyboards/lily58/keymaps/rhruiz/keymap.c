@@ -6,6 +6,14 @@
 
 #define ___ KC_TRNS
 
+#ifdef BLA
+#define _FUNCTIONS_LEFT KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6
+#define _FUNCTIONS_RGHT KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12
+#else
+#define _FUNCTIONS_LEFT KC_F1, KC_F2, KC_V, KC_B, KC_G, KC_F6
+#define _FUNCTIONS_RGHT KC_F7, KC_J, KC_H, KC_K, KC_F11, KC_F12
+#endif
+
 // clang-format off
 #define LAYOUT_base( \
     L01, L02, L03, L04, L05,   R01, R02, R03, R04, R05, \
@@ -15,7 +23,7 @@
   ) \
   LAYOUT_wrapper( \
 /*,--------------------------------------.                     ,--------------------------------------.*/ \
-    KC_TILD,   L01  , L02, L03, L04, L05 ,                         R01  , R02, R03, R04, R05 , KC_ESC , \
+                       _FUNCTIONS_LEFT   ,                                 _FUNCTIONS_RGHT            , \
 /*|--------+--------+----+----+----+-----|                     |--------+----+----+-----+----+--------|*/ \
     KC_TAB ,   L11  , L12, L13, L14, L15 ,                         R11  , R12, R13, R14, R15 , KC_BSPC, \
 /*|--------+--------+----+----+----+-----|                     |--------+----+----+-----+----+--------|*/ \
@@ -23,7 +31,7 @@
 /*|--------+--------+----+----+----+-----|----------| |--------+--------+----+----+-----+----+--------|*/ \
     KC_LSFT,   L31  , L32, L33, L34, L35 ,  TG_GAME ,   TG_NUM ,   R31  , R32, R33, R34, R35 , KC_RSFT, \
 /*`--------+---------------------------------------/   \---------------------------+---------+--------'*/ \
-                KC_CAPS, KC_LGUI, MO_LWR, CT_SPC ,         ST_ENT , MO_RSE , KC_RALT, KC_RGUI            \
+                KC_CAPS, KC_LGUI, MO_LWR , CT_SPC ,        ST_ENT , MO_RSE , KC_RALT, KC_RGUI            \
 /*            `--------+--------+----------------/       \--------+--------+--------+--------'         */ \
   )
 
