@@ -104,11 +104,7 @@
 //                                 |--------+--------+--------+--------+--------|
 #define ________R_LWR_3________      KC_GRV , KC_COLN, KC_PIPE, KC_CIRC, KC_QUOT
 //                                 |--------+--------+--------+--------+--------|
-#ifdef LOCK_LAYERS
-#define ________R_LWR_4________      KC_TILD, KC_AMPR, KC_FARW, KC_ARRW, TO_RSE
-#else
 #define ________R_LWR_4________      KC_TILD, KC_AMPR, KC_FARW, KC_ARRW, KC_DQUO
-#endif
 //                                 `--------+--------+--------+--------+--------'
 
 //                                 .--------------------------------------------.

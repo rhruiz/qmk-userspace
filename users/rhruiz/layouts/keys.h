@@ -89,15 +89,6 @@ typedef enum custom_keycodes {
 #define TG_RSE TG(_FN2)
 #define TG_AUG TG(_AUG)
 
-// layer TO
-#define TO_BL TO(_CODH)
-#define TO_NUM TO(_NUM)
-#define TO_GAME TO(_GAME)
-#define TO_CFG TO(_CFG)
-#define TO_LWR TO(_FN1)
-#define TO_RSE TO(_FN2)
-#define TO_AUG TO(_AUG)
-
 // mod taps
 #define ST_SPC LSFT_T(KC_SPACE)
 #define ST_ENT LSFT_T(KC_ENTER)

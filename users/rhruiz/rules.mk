@@ -27,10 +27,6 @@ ifeq ($(strip $(RGBLIGHT_LAYERS)), yes)
 	OPT_DEFS += -DRGBLIGHT_LAYERS -DRGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
 endif
 
-ifeq ($(strip $(LOCK_LAYERS)), yes)
-	OPT_DEFS += -DLOCK_LAYERS
-endif
-
 ifeq ($(strip $(OS_DETECTION_ENABLE)), yes)
     DEFERRED_EXEC_ENABLE = yes
 endif
