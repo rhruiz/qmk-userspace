@@ -195,28 +195,34 @@ void housekeeping_task_keymap(void) {
 }
 
 #if defined(RGB_MATRIX_ENABLE)
+
+#define LWR_LED 7
+#define RSE_LED 30
+
 bool rgb_matrix_indicators_keymap(void) {
     switch(get_highest_layer(layer_state|default_layer_state)) {
         case _FN1:
         case _GAMEFN1:
             if (is_keyboard_left()) {
-                rgb_matrix_set_color(7, LWR_RGB);
+                rgb_matrix_set_color(LWR_LED, LWR_RGB);
             }
             break;
 
         case _FN2:
             if (!is_keyboard_left()) {
-                rgb_matrix_set_color(30, RSE_RGB);
+                rgb_matrix_set_color(RSE_LED, RSE_RGB);
             }
             break;
 
         case _AUG:
-            rgb_matrix_set_color(7, AUG_RGB);
+            rgb_matrix_set_color(LWR_LED, AUG_RGB);
             break;
     }
 
     if ((is_keyboard_left() && layer_state_is(_NUM)) ||
         (!is_keyboard_left() && layer_state_is(_NUML))) {
+        rgb_matrix_set_color(LWR_LED, 64, 0, 0);
+
         rgb_matrix_set_color(5, RGB_PURPLE);
         rgb_matrix_set_color(10, RGB_PURPLE);
         rgb_matrix_set_color(11, RGB_PURPLE);
@@ -225,9 +231,9 @@ bool rgb_matrix_indicators_keymap(void) {
 
     if ((!is_keyboard_left() && layer_state_is(_NUM)) ||
         (is_keyboard_left() && layer_state_is(_NUML))) {
+        rgb_matrix_set_color(LWR_LED, 64, 0, 0);
         rgb_matrix_set_color(21, 64, 0, 0);
 
-        rgb_matrix_set_color(4, NUN_RGB);
         rgb_matrix_set_color(5, NUN_RGB);
         rgb_matrix_set_color(6, NUN_RGB);
         rgb_matrix_set_color(7, NUN_RGB);
@@ -274,13 +280,20 @@ bool rgb_matrix_indicators_keymap(void) {
 #       endif
 
         if (layer_state_is(_FUNC)) {
+            rgb_matrix_set_color(LWR_LED, FUN_RGB);
+
             rgb_matrix_set_color(5, FUN_RGB);
             rgb_matrix_set_color(10, FUN_RGB);
             rgb_matrix_set_color(13, FUN_RGB);
             rgb_matrix_set_color(16, FUN_RGB);
         }
+
+        if (layer_state_is(_CFG)) {
+            rgb_matrix_set_color(LWR_LED, CFG_RGB);
+        }
     } else {
         if (layer_state_is(_CFG)) {
+            rgb_matrix_set_color(LWR_LED, CFG_RGB);
             rgb_matrix_set_color(3, CFG_RGB);
 
             if (default_layer_index()) {
@@ -299,6 +312,8 @@ bool rgb_matrix_indicators_keymap(void) {
         }
 
         if (layer_state_is(_FUNC)) {
+            rgb_matrix_set_color(LWR_LED, FUN_RGB);
+
             rgb_matrix_set_color(4, FUN_RGB);
             rgb_matrix_set_color(5, FUN_RGB);
             rgb_matrix_set_color(6, FUN_RGB);
@@ -352,6 +367,7 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 uint32_t disable_boot_rgb(uint32_t next_trigger_time, void *cb_arg) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    rgb_matrix_set_speed_noeeprom(128);
     return 0;
 }
 #endif
@@ -359,9 +375,9 @@ uint32_t disable_boot_rgb(uint32_t next_trigger_time, void *cb_arg) {
 void keyboard_post_init_keymap() {
 #if defined(RGB_MATRIX_ENABLE)
     #if defined(DEFERRED_EXEC_ENABLE)
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_LEFT_RIGHT);
-    rgb_matrix_set_speed_noeeprom(128);
-    defer_exec(2000, disable_boot_rgb, NULL);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_BAND_VAL);
+    rgb_matrix_set_speed_noeeprom(191);
+    defer_exec(1200, disable_boot_rgb, NULL);
     #else
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
