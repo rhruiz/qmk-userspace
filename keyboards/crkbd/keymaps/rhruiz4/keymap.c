@@ -234,6 +234,7 @@ bool rgb_matrix_indicators_keymap(void) {
         rgb_matrix_set_color(LWR_LED, 64, 0, 0);
         rgb_matrix_set_color(21, 64, 0, 0);
 
+        rgb_matrix_set_color(4, NUN_RGB);
         rgb_matrix_set_color(5, NUN_RGB);
         rgb_matrix_set_color(6, NUN_RGB);
         rgb_matrix_set_color(7, NUN_RGB);
