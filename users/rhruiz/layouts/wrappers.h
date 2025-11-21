@@ -90,7 +90,7 @@
 //                                 .--------------------------------------------.
 #define ________L_LWR_1________                ____FUNCTIONS_LEFT____
 //                                 |--------+--------+--------+--------+--------|
-#define ________L_LWR_2________      KC_EXLM, KC_LCBR, KC_RCBR, KC_DLR , KC_PERC
+#define ________L_LWR_2________      KC_EXLM, KC_LCBR, KC_RCBR, KC_PERC, KC_DLR
 //                                 |--------+--------+--------+--------+--------|
 #define ________L_LWR_3________      KC_HASH, KC_LBRC, KC_RBRC, KC_MINS, KC_PLUS
 //                                 |--------+--------+--------+--------+--------|
