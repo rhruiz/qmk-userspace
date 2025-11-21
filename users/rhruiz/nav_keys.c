@@ -77,7 +77,7 @@ void window_switcher(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t default_layer_state_set_user_nav(layer_state_t state) {
-    if (state < FIRST_NON_BASE_LAYER && window_switcher_mod != 0) {
+    if (get_highest_layer(state) < FIRST_NON_BASE_LAYER && window_switcher_mod != 0) {
         unregister_mods(window_switcher_mod);
         window_switcher_mod = 0;
     }
