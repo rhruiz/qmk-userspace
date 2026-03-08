@@ -200,50 +200,52 @@ void housekeeping_task_keymap(void) {
 #define RSE_LED 30
 
 bool rgb_matrix_indicators_keymap(void) {
-    switch(get_highest_layer(layer_state|default_layer_state)) {
+    uint8_t k_rgb_matrix_split[2] = RGB_MATRIX_SPLIT;
+    uint8_t left_leds = k_rgb_matrix_split[0];
+
+    switch (get_highest_layer(layer_state|default_layer_state)) {
         case _FN1:
         case _GAMEFN1:
-            if (is_keyboard_left()) {
-                rgb_matrix_set_color(LWR_LED, LWR_RGB);
-            }
+            rgb_matrix_set_color(LWR_LED, LWR_RGB);
             break;
 
         case _FN2:
-            if (!is_keyboard_left()) {
-                rgb_matrix_set_color(RSE_LED, RSE_RGB);
-            }
+            rgb_matrix_set_color(RSE_LED, RSE_RGB);
             break;
 
         case _AUG:
             rgb_matrix_set_color(LWR_LED, AUG_RGB);
+            rgb_matrix_set_color(RSE_LED, AUG_RGB);
             break;
     }
 
-    if ((is_keyboard_left() && layer_state_is(_NUM)) ||
-        (!is_keyboard_left() && layer_state_is(_NUML))) {
-        rgb_matrix_set_color(LWR_LED, 64, 0, 0);
+    if (layer_state_is(_NUM) || layer_state_is(_NUML)) {
+        uint8_t offset = layer_state_is(_NUM) ? 0 : left_leds;
 
-        rgb_matrix_set_color(5, RGB_PURPLE);
-        rgb_matrix_set_color(10, RGB_PURPLE);
-        rgb_matrix_set_color(11, RGB_PURPLE);
-        rgb_matrix_set_color(13, RGB_PURPLE);
-    }
+        // left side on NUM, right on NUML
+        rgb_matrix_set_color(offset + LWR_LED, 64, 0, 0);
 
-    if ((!is_keyboard_left() && layer_state_is(_NUM)) ||
-        (is_keyboard_left() && layer_state_is(_NUML))) {
-        rgb_matrix_set_color(LWR_LED, 64, 0, 0);
-        rgb_matrix_set_color(21, 64, 0, 0);
+        rgb_matrix_set_color(offset + 5, RGB_PURPLE);
+        rgb_matrix_set_color(offset + 10, RGB_PURPLE);
+        rgb_matrix_set_color(offset + 11, RGB_PURPLE);
+        rgb_matrix_set_color(offset + 13, RGB_PURPLE);
 
-        rgb_matrix_set_color(4, NUN_RGB);
-        rgb_matrix_set_color(5, NUN_RGB);
-        rgb_matrix_set_color(6, NUN_RGB);
-        rgb_matrix_set_color(7, NUN_RGB);
-        rgb_matrix_set_color(9, NUN_RGB);
-        rgb_matrix_set_color(10, NUN_RGB);
-        rgb_matrix_set_color(11, NUN_RGB);
-        rgb_matrix_set_color(12, NUN_RGB);
-        rgb_matrix_set_color(13, NUN_RGB);
-        rgb_matrix_set_color(14, NUN_RGB);
+        // right side on NUM, left on NUML
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + RSE_LED , 64, 0, 0);
+
+        // inner colunm, top key, right for NUM, left for NUML
+        rgb_matrix_set_color(44 - offset, 64, 0, 0);
+
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 4, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 5, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 6, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 7, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 9, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 10, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 11, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 12, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 13, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 14, NUN_RGB);
     }
 
 #   if defined(HOME_ROW_MODS)
@@ -252,81 +254,77 @@ bool rgb_matrix_indicators_keymap(void) {
     mods |= mod_config(get_oneshot_mods());
 #   endif
 
+    uint8_t nav_index = nav_keys_index();
+    uint8_t mods_offset = 0;
+
     if (!is_keyboard_left()) {
         mods = mods >> 4;
+        mods_offset = left_leds;
     }
-
-    uint8_t nav_index = nav_keys_index();
 
     if (mods & MOD_BIT(KC_LGUI)) {
-        rgb_matrix_set_color(5 + 11 * nav_index, RGB_PURPLE);
+        rgb_matrix_set_color(mods_offset + 5 + 11 * nav_index, RGB_PURPLE);
     }
+
     if (mods & MOD_BIT(KC_LCTL)) {
-        rgb_matrix_set_color(16 - 11 * nav_index, RGB_TEAL);
+        rgb_matrix_set_color(mods_offset + 16 - 11 * nav_index, RGB_TEAL);
     }
+
     if (mods & MOD_BIT(KC_LSFT)) {
-        rgb_matrix_set_color(13, RGB_RED);
+        rgb_matrix_set_color(mods_offset + 13, RGB_RED);
     }
+
     if (mods & MOD_BIT(KC_LALT)) {
-        rgb_matrix_set_color(10, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(mods_offset + 10, RGB_SPRINGGREEN);
     }
 #   endif
 
+#   if defined(CAPS_WORD_ENABLE)
+    if (caps_word_enabled()) {
+        rgb_matrix_set_color(9, CAPS_RGB);
+    }
+#   endif
 
-    if (is_keyboard_left()) {
-#       if defined(CAPS_WORD_ENABLE)
-        if (caps_word_enabled()) {
-            rgb_matrix_set_color(9, CAPS_RGB);
+    if (layer_state_is(_FUNC)) {
+        rgb_matrix_set_color(LWR_LED, FUN_RGB);
+        rgb_matrix_set_color(RSE_LED, FUN_RGB);
+
+        rgb_matrix_set_color(5, FUN_RGB);
+        rgb_matrix_set_color(10, FUN_RGB);
+        rgb_matrix_set_color(13, FUN_RGB);
+        rgb_matrix_set_color(16, FUN_RGB);
+
+        rgb_matrix_set_color(left_leds + 4, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 5, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 6, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 9, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 10, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 11, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 12, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 13, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 14, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 15, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 16, FUN_RGB);
+        rgb_matrix_set_color(left_leds + 17, FUN_RGB);
+    }
+
+    if (layer_state_is(_CFG)) {
+        rgb_matrix_set_color(left_leds + 3, CFG_RGB);
+        rgb_matrix_set_color(LWR_LED, CFG_RGB);
+        rgb_matrix_set_color(RSE_LED, CFG_RGB);
+
+        if (default_layer_index()) {
+            rgb_matrix_set_color(left_leds + 10, RGB_OFF);
+            rgb_matrix_set_color(left_leds + 5, COLEMAK_RGB);
+        } else {
+            rgb_matrix_set_color(left_leds + 5, RGB_OFF);
+            rgb_matrix_set_color(left_leds + 10, QWERTY_RGB);
         }
-#       endif
 
-        if (layer_state_is(_FUNC)) {
-            rgb_matrix_set_color(LWR_LED, FUN_RGB);
-
-            rgb_matrix_set_color(5, FUN_RGB);
-            rgb_matrix_set_color(10, FUN_RGB);
-            rgb_matrix_set_color(13, FUN_RGB);
-            rgb_matrix_set_color(16, FUN_RGB);
-        }
-
-        if (layer_state_is(_CFG)) {
-            rgb_matrix_set_color(LWR_LED, CFG_RGB);
-        }
-    } else {
-        if (layer_state_is(_CFG)) {
-            rgb_matrix_set_color(LWR_LED, CFG_RGB);
-            rgb_matrix_set_color(3, CFG_RGB);
-
-            if (default_layer_index()) {
-                rgb_matrix_set_color(10, RGB_OFF);
-                rgb_matrix_set_color(g_led_config.matrix_co[1][4], COLEMAK_RGB);
-            } else {
-                rgb_matrix_set_color(5, RGB_OFF);
-                rgb_matrix_set_color(g_led_config.matrix_co[1][3], QWERTY_RGB);
-            }
-
-            if (nav_keys_index() == 0) {
-                rgb_matrix_set_color(g_led_config.matrix_co[5][2], MAC_RGB);
-            } else {
-                rgb_matrix_set_color(g_led_config.matrix_co[5][2], WIN_RGB);
-            }
-        }
-
-        if (layer_state_is(_FUNC)) {
-            rgb_matrix_set_color(LWR_LED, FUN_RGB);
-
-            rgb_matrix_set_color(4, FUN_RGB);
-            rgb_matrix_set_color(5, FUN_RGB);
-            rgb_matrix_set_color(6, FUN_RGB);
-            rgb_matrix_set_color(9, FUN_RGB);
-            rgb_matrix_set_color(10, FUN_RGB);
-            rgb_matrix_set_color(11, FUN_RGB);
-            rgb_matrix_set_color(12, FUN_RGB);
-            rgb_matrix_set_color(13, FUN_RGB);
-            rgb_matrix_set_color(14, FUN_RGB);
-            rgb_matrix_set_color(15, FUN_RGB);
-            rgb_matrix_set_color(16, FUN_RGB);
-            rgb_matrix_set_color(17, FUN_RGB);
+        if (nav_keys_index() == 0) {
+            rgb_matrix_set_color(g_led_config.matrix_co[5][2], MAC_RGB);
+        } else {
+            rgb_matrix_set_color(g_led_config.matrix_co[5][2], WIN_RGB);
         }
     }
 
