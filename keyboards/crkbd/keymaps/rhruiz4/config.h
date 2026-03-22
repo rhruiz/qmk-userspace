@@ -22,6 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define BASE_LAYERS _QWER, _CODH
 
+#if defined(VIA_ENABLE)
+#    undef DYNAMIC_KEYMAP_LAYER_COUNT
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 16
+#endif
+
 #if defined(QMK_MCU_ATMEGA32U4)
 #    define PRO_MICRO
 #    define BLINK_LED_PIN B0

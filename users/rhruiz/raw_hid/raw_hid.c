@@ -2,6 +2,7 @@
 #    error this file requires RAW_ENABLE
 #endif
 
+#ifndef VIA_ENABLE
 #include "quantum.h"
 #include "rhruiz.h"
 #include "api.h"
@@ -91,3 +92,4 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 
     raw_hid_send(data, length);
 }
+#endif
