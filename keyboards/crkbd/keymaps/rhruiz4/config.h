@@ -52,11 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGBLIGHT_MAX_LAYERS 11
 #endif
 
-// bootmagic
-
-#define BOOTMAGIC_ROW 0
-#define BOOTMAGIC_COLUMN 1
-
 // bootloader
 
 #define QMK_ESC_OUTPUT F4  // usually COL

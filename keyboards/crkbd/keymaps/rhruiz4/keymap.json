@@ -1,0 +1,8 @@
+{
+    "config": {
+        "features": {
+            "nkro": false,
+            "oled": false
+        }
+    }
+}
