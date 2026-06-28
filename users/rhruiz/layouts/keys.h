@@ -1,7 +1,19 @@
 #pragma once
 #include "quantum/quantum_keycodes.h"
 
-typedef enum rhruiz_layers { _QWER, _CODH, _GAME, _NUM, _NUML, _FN1, _FN2, _GAMEFN1, _AUG, _CFG, _FUNC } rhruiz_layers;
+typedef enum rhruiz_layers {
+    _QWER,
+    _CODH,
+    _GAME,
+    _NUM,
+    _NUML,
+    _LWR,
+    _RSE,
+    _GAMELWR,
+    _AUG,
+    _CFG,
+    _FUNC
+} rhruiz_layers;
 
 typedef enum custom_keycodes {
     // macro keys
@@ -54,17 +66,17 @@ typedef enum custom_keycodes {
 #    define MO_LWR TL_LOWR
 #    define MO_RSE TL_UPPR
 #else
-#    define MO_LWR MO(_FN1)
-#    define MO_RSE MO(_FN2)
+#    define MO_LWR MO(_LWR)
+#    define MO_RSE MO(_RSE)
 #endif
 #define MO_NUM MO(_NUM)
 #define MO_CFG MO(_CFG)
 #define MO_AUG MO(_AUG)
 
 // layers: osl
-#define OSL_GLWR OSL(_GAMEFN1)
-#define OSL_LWR OSL(_FN1)
-#define OSL_RSE OSL(_FN2)
+#define OSL_GLWR OSL(_GAMELWR)
+#define OSL_LWR OSL(_LWR)
+#define OSL_RSE OSL(_RSE)
 #define OSL_AUG OSL(_AUG)
 #define OSL_FUN OSL(_FUNC)
 
@@ -72,21 +84,21 @@ typedef enum custom_keycodes {
 #define DF_BL DF(_QWER)
 
 // layers + mods
-#define LM_GLWR LM(_GAMEFN1, MOD_LSFT)
+#define LM_GLWR LM(_GAMELWR, MOD_LSFT)
 
 // layer tap
-#define LT_LWR_SPC LT(_FN1, KC_SPC)
-#define LT_RSE_ENT LT(_FN2, KC_ENTER)
-#define LT_RSE_0 LT(_FN2, KC_0)
-#define LT_LWR_0 LT(_FN1, KC_0)
+#define LT_LWR_SPC LT(_LWR, KC_SPC)
+#define LT_RSE_ENT LT(_RSE, KC_ENTER)
+#define LT_RSE_0 LT(_RSE, KC_0)
+#define LT_LWR_0 LT(_LWR, KC_0)
 
 // layer toggle
 #define TG_NUM TG(_NUM)
 #define TG_NUML TG(_NUML)
 #define TG_GAME TG(_GAME)
 #define TG_CFG TG(_CFG)
-#define TG_LWR TG(_FN1)
-#define TG_RSE TG(_FN2)
+#define TG_LWR TG(_LWR)
+#define TG_RSE TG(_RSE)
 #define TG_AUG TG(_AUG)
 
 // mod taps

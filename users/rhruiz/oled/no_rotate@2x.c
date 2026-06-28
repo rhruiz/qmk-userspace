@@ -16,7 +16,7 @@ static const char lc[][4][3] PROGMEM = {
     [_CFG]     = {"\x80\x81", "\xa0\xa1", "\xc0\xc1", "\x80\x81"},
     [_NUM]     = {"\xae\xaf", "\xce\xcf", "\x20\x20", "\xd2\xd3"},
     [_GAME]    = {"\x20\x20", "\x82\x83", "\xa2\xa3", "\xc2\xc3"},
-    [_GAMEFN1] = {"\x20\x20", "\xb0\xb1", "\xd0\xd1", "\x11\x11"},
+    [_GAMELWR] = {"\x20\x20", "\xb0\xb1", "\xd0\xd1", "\x11\x11"},
 };
 
 static const char _game_layer_logo[][4] PROGMEM = {
@@ -38,14 +38,14 @@ __attribute__((weak)) bool oled_task_user(void) {
     layer_state_t layer = get_highest_layer(layer_state);
 
     switch (layer) {
-        case _FN1:
+        case _LWR:
             oled_write_P(arrow_down0, false);
             oled_write_P(arrow_down1, false);
             oled_write_P(PSTR("\x8b\x20\x8f\x20\x89\n"), true);
             oled_write_P(arrow_down1, true);
             break;
 
-        case _FN2:
+        case _RSE:
             oled_write_P(arrow_up, false);
             oled_write_P(arrow_up, true);
             break;
@@ -74,7 +74,7 @@ __attribute__((weak)) bool oled_task_user(void) {
             }
             break;
 
-        case _GAMEFN1:
+        case _GAMELWR:
             oled_write_P(_spacer, false);
             oled_write_P(lc[layer][3], false);
             oled_write_char('\n', false);

@@ -94,14 +94,14 @@ __attribute__((weak)) bool oled_task_user(void) {
     layer_state_t layer = get_highest_layer(layer_state);
 
     switch (layer) {
-        case _FN1:
-        case _FN2:
+        case _LWR:
+        case _RSE:
             oled_on = true;
             oled_clear_half_except(6);
             for (uint8_t i = 0; i < 6; i++) {
                 oled_wear_save_pad(3, is_keyboard_left());
-                oled_write_char(0x8C - (layer - _FN1), i % 2 == 1);
-                oled_write_char(0x8B + (layer - _FN1), i % 2 == 1);
+                oled_write_char(0x8C - (layer - _LWR), i % 2 == 1);
+                oled_write_char(0x8B + (layer - _LWR), i % 2 == 1);
                 oled_wear_save_pad(3, !is_keyboard_left());
             }
             oled_clear_half_except(6);
@@ -139,18 +139,18 @@ __attribute__((weak)) bool oled_task_user(void) {
             break;
 
         case _GAME:
-        case _GAMEFN1:
+        case _GAMELWR:
             oled_on = true;
             oled_clear_half_except(2);
 
             for (uint8_t i = 0; i < 2; i++) {
-                if (is_keyboard_left()) oled_write_char(0x20 - (layer/_GAMEFN1), false);
+                if (is_keyboard_left()) oled_write_char(0x20 - (layer/_GAMELWR), false);
 
                 for (uint8_t chr = 0; chr < 4; chr++) {
                   oled_write_char(0xAC + i * 0x20 + chr - (layer - _GAME), false);
                 }
 
-                if (!is_keyboard_left()) oled_write_char(0x20 - (layer/_GAMEFN1), false);
+                if (!is_keyboard_left()) oled_write_char(0x20 - (layer/_GAMELWR), false);
             }
 
             oled_clear_half_except(2);

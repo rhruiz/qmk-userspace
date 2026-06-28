@@ -30,7 +30,7 @@
 #    define BASE_LAYERS _QWER
 #endif
 
-#define FIRST_NON_BASE_LAYER _FN1
+#define FIRST_NON_BASE_LAYER _LWR
 
 bool process_record_nav(uint16_t keycode, keyrecord_t *record);
 bool process_record_macros(uint16_t keycode, keyrecord_t *record);

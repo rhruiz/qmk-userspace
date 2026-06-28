@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //`--------+--------+--------'        `--------+--------+--------'
     ),
 
-  [_GAMEFN1] = LAYOUT_split_3x5_3_wrapper(
+  [_GAMELWR] = LAYOUT_split_3x5_3_wrapper(
 //,--------------------------.        ,--------------------------------------------.
      _____NUMBERS_LEFT_____  , KC_MPLY, _______, _______,  KC_UP , _______, _______,
 //|--------------------------|        |--------------------------------------------|
@@ -100,14 +100,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //`--------+--------+--------'        `--------+--------+--------'
     ),
 
-  [_FN1] = LAYOUT_non_base_wrapper(
+  [_LWR] = LAYOUT_non_base_wrapper(
     ________L_LWR_2________, ________R_LWR_2________,
     ________L_LWR_3________, ________R_LWR_3________,
     ________L_LWR_4________, ________R_LWR_4________,
     KC_MUTE
   ),
 
-  [_FN2] = LAYOUT_non_base_wrapper(
+  [_RSE] = LAYOUT_non_base_wrapper(
     ________L_RSE_2________, ________R_RSE_2________,
     ________L_RSE_3________, ________R_RSE_3________,
     ________L_RSE_4________, ________R_RSE_4________,
@@ -181,8 +181,8 @@ void housekeeping_task_keymap(void) {
 }
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
-    rgblight_set_layer_state(0, layer_state_cmp(state, _FN1) || layer_state_cmp(state, _GAMEFN1));
-    rgblight_set_layer_state(1, layer_state_cmp(state, _FN2));
+    rgblight_set_layer_state(0, layer_state_cmp(state, _LWR) || layer_state_cmp(state, _GAMELWR));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _RSE));
     rgblight_set_layer_state(2, layer_state_cmp(state, _AUG));
     rgblight_set_layer_state(3, layer_state_cmp(state, _CFG));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUM));
@@ -232,9 +232,9 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_QWER]    = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
     [_CODH]    = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
     [_GAME]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_GAMEFN1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_FN1]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_FN2]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_GAMELWR] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_LWR]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_RSE]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_AUG]     = { ENCODER_CCW_CW(UG_VALD, UG_VALU) },
     [_CFG]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_NUM]     = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
@@ -248,9 +248,9 @@ bool encoder_update_keymap(uint8_t _index, bool clockwise) {
         case _QWER:
         case _CODH:
         case _GAME:
-        case _GAMEFN1:
-        case _FN1:
-        case _FN2:
+        case _GAMELWR:
+        case _LWR:
+        case _RSE:
         case _AUG:
         case _FUNC:
             break;

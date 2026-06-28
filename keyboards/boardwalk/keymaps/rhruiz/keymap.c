@@ -34,8 +34,8 @@ const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
 #ifdef RGBLIGHT_LAYERS
-    rgblight_set_layer_state(0, layer_state_cmp(state, _FN1));
-    rgblight_set_layer_state(1, layer_state_cmp(state, _FN2));
+    rgblight_set_layer_state(0, layer_state_cmp(state, _LWR));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _RSE));
     rgblight_set_layer_state(2, layer_state_cmp(state, _CFG));
     rgblight_set_layer_state(3, layer_state_cmp(state, _NUM));
     rgblight_set_layer_state(4, layer_state_cmp(state, _GAME));

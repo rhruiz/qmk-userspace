@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //         `--------+--------+--------'  `--------+--------+--------'
     ),
 
-  [_GAMEFN1] = LAYOUT_split_3x6_3_wrapper(
+  [_GAMELWR] = LAYOUT_split_3x6_3_wrapper(
 //,-----------------------------------.  ,-----------------------------------------------------.
     KC_TAB ,  _____NUMBERS_LEFT_____  ,    _______, _______,  KC_UP , _______, _______, _______,
 //|--------+--------------------------|  |--------------------------------------------+--------|
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //         `--------+--------+--------'  `--------+--------+--------'
     ),
 
-  [_FN1] = LAYOUT_split_3x6_3_ex2_wrapper(
+  [_LWR] = LAYOUT_split_3x6_3_ex2_wrapper(
 //,-----------------------------------.--------.   ,--------------------------------------------.
     KC_GRV ,  ________L_LWR_2________ , _______,     _______,  ________R_LWR_2________ , KC_DEL ,
 //|--------+--------------------------|--------|   |--------+--------------------------+--------|
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //         `--------+--------+--------'                     `--------+--------+--------'
   ),
 
-  [_FN2] = LAYOUT_split_3x6_3_wrapper(
+  [_RSE] = LAYOUT_split_3x6_3_wrapper(
 //,-----------------------------------.  ,-----------------------------------.
     KC_GRV ,  ________L_RSE_2________ ,     ________R_RSE_2________ , KC_DEL ,
 //|--------+--------------------------|  |--------------------------+--------|
@@ -134,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,--------------------------------------------.   ,--------------------------------------------.
     _______,  ________L_NUM_2________ ,  KC_NO ,     TG_NUM ,  ________R_NUM_1________ , _______,
 //|--------+--------------------------+--------|   |--------+--------------------------+--------|
-    _______,  ________L_NUM_3________ ,  KC_NO ,      KC_NO ,  ________R_NUM_2________ , TG_NUM ,
+    _______,  ________L_NUM_3________ ,  KC_NO ,     KC_CCCP,  ________R_NUM_2________ , TG_NUM ,
 //|--------+--------------------------+--------'   `--------+--------------------------+--------|
     _______,  ________L_NUM_4________ ,                        ________R_NUM_3________ , _______,
 //`--------+--------------------------|                     |--------------------------+--------'
@@ -204,12 +204,12 @@ bool rgb_matrix_indicators_keymap(void) {
     uint8_t left_leds = k_rgb_matrix_split[0];
 
     switch (get_highest_layer(layer_state|default_layer_state)) {
-        case _FN1:
-        case _GAMEFN1:
+        case _LWR:
+        case _GAMELWR:
             rgb_matrix_set_color(LWR_LED, LWR_RGB);
             break;
 
-        case _FN2:
+        case _RSE:
             rgb_matrix_set_color(RSE_LED, RSE_RGB);
             break;
 
@@ -334,8 +334,8 @@ bool rgb_matrix_indicators_keymap(void) {
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-    rgblight_set_layer_state(0, layer_state_cmp(state, _FN1) || layer_state_cmp(state, _GAMEFN1));
-    rgblight_set_layer_state(1, layer_state_cmp(state, _FN2));
+    rgblight_set_layer_state(0, layer_state_cmp(state, _LWR) || layer_state_cmp(state, _GAMELWR));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _RSE));
     rgblight_set_layer_state(2, layer_state_cmp(state, _AUG));
     rgblight_set_layer_state(3, layer_state_cmp(state, _CFG));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUM));
