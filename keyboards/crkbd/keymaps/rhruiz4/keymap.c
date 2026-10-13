@@ -294,18 +294,19 @@ bool rgb_matrix_indicators_keymap(void) {
         rgb_matrix_set_color(13, FUN_RGB);
         rgb_matrix_set_color(16, FUN_RGB);
 
-        rgb_matrix_set_color(left_leds + 4, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 5, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 6, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 9, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 10, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 11, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 12, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 13, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 14, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 15, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 16, FUN_RGB);
-        rgb_matrix_set_color(left_leds + 17, FUN_RGB);
+        for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
+            for (uint8_t col = 0; col < MATRIX_COLS; col++) {
+                uint16_t keycode = keymap_key_to_keycode(_FUNC, (keypos_t){.row = row, .col = col});
+                uint8_t index = g_led_config.matrix_co[row][col];
+
+                switch (keycode) {
+                    case KC_F1 ... KC_F12:
+                        rgb_matrix_set_color(index, FUN_RGB);
+                        break;
+
+                }
+            }
+        }
     }
 
     if (layer_state_is(_CFG)) {
