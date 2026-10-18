@@ -208,16 +208,16 @@ bool rgb_matrix_indicators_keymap(void) {
         // inner colunm, top key, right for NUM, left for NUML
         rgb_matrix_set_color(44 - offset, 64, 0, 0);
 
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 4, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 5, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 6, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 7, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 9, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 10, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 11, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 12, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 13, NUN_RGB);
-        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 14, NUN_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 4, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 5, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 6, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 7, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 9, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 10, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 11, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 12, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 13, NUM_RGB);
+        rgb_matrix_set_color(k_rgb_matrix_split[0] - offset + 14, NUM_RGB);
     }
 
 #   if defined(HOME_ROW_MODS)

@@ -16,7 +16,7 @@
 #define FUN_RGB 0x47, 0xa7, 0xed
 
 #define NUM_HSV 0, 255, 255
-#define NUN_RGB 140, 40, 0
+#define NUM_RGB 140, 40, 0
 
 #define CAPS_HSV 180, 255, 255
 #define CAPS_RGB 64, 0, 0
