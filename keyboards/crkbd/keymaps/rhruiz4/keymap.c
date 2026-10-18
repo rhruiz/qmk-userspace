@@ -7,22 +7,6 @@
 #define REVERSE_FIVE(K1, K2, K3, K4, K5) K5, K2, K3, K4, K1
 #define REV5(...) REVERSE_FIVE(__VA_ARGS__)
 
-#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-const rgblight_segment_t PROGMEM fn1_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1, LWR_HSV});
-const rgblight_segment_t PROGMEM fn2_colors[] = RGBLIGHT_LAYER_SEGMENTS({30, 1, RSE_HSV});
-const rgblight_segment_t PROGMEM aug_colors[] = RGBLIGHT_LAYER_SEGMENTS({7, 1,  AUG_HSV}, {30, 1, AUG_HSV});
-const rgblight_segment_t PROGMEM cfg_colors[] = RGBLIGHT_LAYER_SEGMENTS({26, 1, CFG_HSV});
-const rgblight_segment_t PROGMEM num_colors[] = RGBLIGHT_LAYER_SEGMENTS({44, 1, NUM_HSV});
-const rgblight_segment_t PROGMEM fun_colors[] = RGBLIGHT_LAYER_SEGMENTS({27, 3, FUN_HSV}, {32, 9, FUN_HSV});
-const rgblight_segment_t PROGMEM caps_colors[] = RGBLIGHT_LAYER_SEGMENTS({14, 8, CAPS_HSV});
-const rgblight_segment_t PROGMEM qwerty_colors[] = RGBLIGHT_LAYER_SEGMENTS({33, 1, QWERTY_HSV});
-const rgblight_segment_t PROGMEM colemak_dh_colors[] = RGBLIGHT_LAYER_SEGMENTS({28, 1, COLEMAK_HSV});
-const rgblight_segment_t PROGMEM mac_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, MAC_HSV});
-const rgblight_segment_t PROGMEM win_colors[] = RGBLIGHT_LAYER_SEGMENTS({36, 1, WIN_HSV});
-
-const rgblight_segment_t* const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(fn1_colors, fn2_colors, aug_colors, cfg_colors, num_colors, fun_colors, caps_colors, qwerty_colors, colemak_dh_colors, mac_colors, win_colors);
-#endif
-
 // clang-format off
 #define LAYOUT_base_wrapper(...) LAYOUT_base(__VA_ARGS__)
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT_split_3x6_3(__VA_ARGS__)
@@ -182,18 +166,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-void housekeeping_task_keymap(void) {
-#if defined(RGBLIGHT_LAYERS) && defined(RGBLIGHT_ENABLE)
-    rgblight_set_layer_state(7, layer_state_is(_CFG) && default_layer_index() == 0);
-    rgblight_set_layer_state(8, layer_state_is(_CFG) && default_layer_index() == 1);
-    rgblight_set_layer_state(9, layer_state_is(_CFG) && nav_keys_index() == 0);
-    rgblight_set_layer_state(10, layer_state_is(_CFG) && nav_keys_index() == 1);
-#endif
-#if defined(PRO_MICRO)
-    gpio_write_pin(D5, !layer_state_cmp(layer_state, _NUM));
-#endif
-}
-
 #if defined(RGB_MATRIX_ENABLE)
 
 #define LWR_LED 7
@@ -334,20 +306,6 @@ bool rgb_matrix_indicators_keymap(void) {
 #endif
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
-#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-    rgblight_set_layer_state(0, layer_state_cmp(state, _LWR) || layer_state_cmp(state, _GAMELWR));
-    rgblight_set_layer_state(1, layer_state_cmp(state, _RSE));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _AUG));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _CFG));
-    rgblight_set_layer_state(4, layer_state_cmp(state, _NUM));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _FUNC));
-
-    if (layer_state_is(_GAME)) {
-        rgblight_enable_noeeprom();
-    } else {
-        rgblight_reload_from_eeprom();
-    }
-#endif
 #if defined(RGB_MATRIX_ENABLE)
     if (!layer_state_is(_GAME) && layer_state_cmp(state, _GAME)) {
         rgb_matrix_reload_from_eeprom();
@@ -372,8 +330,8 @@ uint32_t disable_boot_rgb(uint32_t next_trigger_time, void *cb_arg) {
 }
 #endif
 
-void keyboard_post_init_keymap() {
 #if defined(RGB_MATRIX_ENABLE)
+void keyboard_post_init_keymap() {
     #if defined(DEFERRED_EXEC_ENABLE)
     rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
     rgb_matrix_set_speed_noeeprom(191);
@@ -383,8 +341,5 @@ void keyboard_post_init_keymap() {
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
     #endif
     rgb_matrix_enable_noeeprom();
-#endif
-#if defined(RGBLIGHT_LAYERS)
-    rgblight_layers = _rgb_layers;
-#endif
 }
+#endif
